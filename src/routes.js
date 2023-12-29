@@ -7,14 +7,17 @@ import {
   MdHome,
   MdLock,
   MdOutlineShoppingCart,
+  MdAssistantNavigation,
+  MdAddToHomeScreen,
 } from "react-icons/md";
 
 // Admin Imports
 import MainDashboard from "views/admin/default";
+import Dashboard from "views/admin/dashboard";
 import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
-import RTL from "views/admin/rtl";
+// import RTL from "views/admin/rtl";
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
@@ -26,6 +29,13 @@ const routes = [
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
+  },
+  {
+    name: "Dashboard",
+    layout: "/admin",
+    path: "/dashboard",
+    icon: <Icon as={MdAssistantNavigation} width='20px' height='20px' color='inherit' />,
+    component: Dashboard,
   },
   {
     name: "NFT Marketplace",
@@ -62,14 +72,7 @@ const routes = [
     path: "/sign-in",
     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
     component: SignInCentered,
-  },
-  {
-    name: "RTL Admin",
-    layout: "/rtl",
-    path: "/rtl-default",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: RTL,
-  },
+  }
 ];
 
 export default routes;
