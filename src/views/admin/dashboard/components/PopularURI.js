@@ -1,7 +1,7 @@
 import React from "react";
 
 // Chakra imports
-import { Box, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Icon, Text, useColorModeValue, useDisclosure,} from "@chakra-ui/react";
 import BarChart from "components/charts/BarChart";
 
 // Custom components
@@ -11,14 +11,24 @@ import {
   barChartOptionsDailyTraffic,
 } from "variables/charts";
 import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
+import  CommonModal from "views/admin/dashboard/components/CommonModal";
+import URITable from "views/admin/dashboard/tables/URITable";
+import {
+  columnsDataDevelopment,
+  columnsDataCheck,
+  columnsDataColumns,
+  columnsDataComplex,
+} from "views/admin/dataTables/variables/columnsData";
+import tableDataColumns from "views/admin/dataTables/variables/tableDataColumns.json";
 
 export default function DailyTraffic(props) {
   const { ...rest } = props;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   return (
-    <Card align='center' direction='column' w='100%' {...rest}>
+    <Card align='center' direction='column' w='100%' {...rest} onClick={onOpen}>
       <Flex justify='space-between' align='start' px='10px' pt='5px'>
         <Flex flexDirection='column' align='start' me='20px'>
           <Flex align='end'>
@@ -36,7 +46,12 @@ export default function DailyTraffic(props) {
               fontWeight='500'>
               Trending
             </Text>
-
+            <CommonModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+              <URITable 
+                columnsData={columnsDataColumns}
+                tableData={tableDataColumns}
+              />
+            </CommonModal>
           </Flex>
           
         </Flex>
