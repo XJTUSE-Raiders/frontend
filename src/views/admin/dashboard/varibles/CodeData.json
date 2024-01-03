@@ -1,0 +1,17 @@
+[
+  {
+    "name":"HTTP 200",
+    "status": "正常",
+    "progress": 90
+  },
+  {
+    "name":"HTTP 500",
+    "status": "故障",
+    "progress": 20 
+  },
+  {
+    "name":"Others",
+    "status": "未知",
+    "progress": 10 
+  }
+]

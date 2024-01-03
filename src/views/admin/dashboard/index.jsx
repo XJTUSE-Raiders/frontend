@@ -8,16 +8,20 @@ import {
   SimpleGrid,
   useColorModeValue,
 } from "@chakra-ui/react";
-import Usa from "assets/img/dashboards/usa.png";
 import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
 import React from "react";
-import {
-  MdAddTask,
-  MdAttachMoney,
-  MdBarChart,
-  MdFileCopy,
-} from "react-icons/md";
+import TotalVisit from "views/admin/dashboard/components/TotalVisit";
+import ISPDistro from "views/admin/dashboard/components/ISPDistro";
+import GeoDistro from "views/admin/dashboard/components/GeoDistro";
+import BroswerDistro from "views/admin/dashboard/components/BroswerDistro";
+import OSDistro from "views/admin/dashboard/components/OSDistro";
+import {GeoConfig} from "views/admin/dashboard/varibles/GeoConfig";
+import GeoData from "views/admin/dashboard/varibles/GeoData.json";
+import PopularURI from "views/admin/dashboard/components/PopularURI";
+import ResponseCode from "views/admin/dashboard/components/ResponseCode";
+import {CodeConfig} from "views/admin/dashboard/varibles/CodeConfig";
+import CodeData from "views/admin/dashboard/varibles/CodeData.json";
 import { 
   FcReadingEbook,
   FcClock,
@@ -76,7 +80,25 @@ export default function DashReports() {
           name='本月总访问量' 
           value='57434' />
       </SimpleGrid>
-      
+      <SimpleGrid columns={{base:1,md:1,xl:2}}  gap='20px' mb='20px'>
+          <TotalVisit />
+          <ISPDistro />
+      </SimpleGrid>
+      <SimpleGrid columns={{base:1, md:2, xl:3}} gap='20px' mb='20px'>
+          <OSDistro />
+          <GeoDistro 
+            tableData={GeoData}
+            columnsData={GeoConfig}
+          />
+          <BroswerDistro />
+      </SimpleGrid>
+      <SimpleGrid columns={{base:1, md:2, xl:2}} gap='20px' mb='20px'>
+          <PopularURI />
+          <ResponseCode 
+            columnsData={CodeConfig}
+            tableData={CodeData}
+          />
+      </SimpleGrid>
     </Box>
   )
 }

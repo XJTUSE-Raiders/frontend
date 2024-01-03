@@ -107,15 +107,15 @@ export const barChartOptionsDailyTraffic = {
 
 export const barChartDataConsumption = [
   {
-    name: "PRODUCT A",
+    name: "中国电信",
     data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
   },
   {
-    name: "PRODUCT B",
+    name: "中国联通",
     data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
   },
   {
-    name: "PRODUCT C",
+    name: "中国移动",
     data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
   },
 ];
@@ -124,7 +124,7 @@ export const barChartOptionsConsumption = {
   chart: {
     stacked: true,
     toolbar: {
-      show: false,
+      show: true,
     },
   },
   tooltip: {
@@ -209,8 +209,8 @@ export const barChartOptionsConsumption = {
 };
 
 export const pieChartOptions = {
-  labels: ["Your files", "System", "Empty"],
-  colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+  labels: ["Windows", "macOS", "Linux", "Andoroid", "iOS"],
+  colors: ["#4318FF", "#7585fa", "#689cf7", "#6AD2FF", "#EFF4FB"],
   chart: {
     width: "50px",
   },
@@ -222,24 +222,28 @@ export const pieChartOptions = {
     },
   },
   legend: {
-    show: false,
+    show: true,
   },
   dataLabels: {
     enabled: false,
+    textAnchor: 'middle',
+    dropShadow:{
+      enabled: false
+    }
   },
   hover: { mode: null },
   plotOptions: {
     donut: {
-      expandOnClick: false,
+      expandOnClick: true,
       donut: {
         labels: {
-          show: false,
+          show: true,
         },
       },
     },
   },
   fill: {
-    colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+    colors: ["#4318FF", "#7585fa", "#689cf7", "#6AD2FF", "#EFF4FB"],
   },
   tooltip: {
     enabled: true,
@@ -247,7 +251,7 @@ export const pieChartOptions = {
   },
 };
 
-export const pieChartData = [63, 25, 12];
+export const pieChartData = [50, 25, 15, 5, 5];
 
 // Total Spent Default
 
@@ -296,7 +300,7 @@ export const lineChartOptionsTotalSpent = {
     theme: "dark",
   },
   dataLabels: {
-    enabled: false,
+    enabled: true,
   },
   stroke: {
     curve: "smooth",
@@ -323,7 +327,7 @@ export const lineChartOptionsTotalSpent = {
     show: false,
   },
   legend: {
-    show: false,
+    show: true,
   },
   grid: {
     show: false,
