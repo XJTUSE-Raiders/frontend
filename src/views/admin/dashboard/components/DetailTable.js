@@ -8,7 +8,9 @@ import {
   Thead,
   Tr,
   useColorModeValue,
+  IconButton,
 } from "@chakra-ui/react";
+import { MdCached } from "react-icons/md";
 import React, { useMemo } from "react";
 import {
   useGlobalFilter,
@@ -19,9 +21,8 @@ import {
 
 // Custom components
 import Card from "components/card/Card";
-import Menu from "components/menu/MainMenu";
 export default function ColumnsTable(props) {
-  const { columnsData, tableData } = props;
+  const { columnsData, tableData, tableName } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -60,9 +61,15 @@ export default function ColumnsTable(props) {
           fontSize='22px'
           fontWeight='700'
           lineHeight='100%'>
-          4-Column Table
+          {tableName}
         </Text>
-        <Menu />
+        <IconButton
+          colorScheme="brand"
+          aria-label="Refresh"
+          borderRadius="10px"
+          icon={<MdCached size={25} />}
+        />
+
       </Flex>
       <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
         <Thead>
@@ -93,7 +100,7 @@ export default function ColumnsTable(props) {
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
                   let data = "";
-                  if (cell.column.Header === "NAME") {
+                  if (cell.column.Header === "名称") {
                     data = (
                       <Flex align='center'>
                         <Text color={textColor} fontSize='sm' fontWeight='700'>
@@ -101,7 +108,7 @@ export default function ColumnsTable(props) {
                         </Text>
                       </Flex>
                     );
-                  } else if (cell.column.Header === "PROGRESS") {
+                  } else if (cell.column.Header === "占比") {
                     data = (
                       <Flex align='center'>
                         <Text
@@ -113,13 +120,13 @@ export default function ColumnsTable(props) {
                         </Text>
                       </Flex>
                     );
-                  } else if (cell.column.Header === "QUANTITY") {
+                  } else if (cell.column.Header === "数量") {
                     data = (
                       <Text color={textColor} fontSize='sm' fontWeight='700'>
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "DATE") {
+                  } else if (cell.column.Header === "日期") {
                     data = (
                       <Text color={textColor} fontSize='sm' fontWeight='700'>
                         {cell.value}

@@ -14,8 +14,9 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
-import Card from 'components/card/Card.js'
+import CardwithModal from "./CardwithModal";
 import React, { useMemo } from "react";
+import TheadwithNoBubble from 'views/admin/dashboard/components/TheadwithNoBubble'
 import {
   useGlobalFilter,
   usePagination,
@@ -25,10 +26,10 @@ import {
 import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
 
 function TopCreatorTable(props) {
-  const { columnsData, tableData } = props;
+  const { chartConfig, chartData, tableConfig, tableData } = props;
 
-  const columns = useMemo(() => columnsData, [columnsData]);
-  const data = useMemo(() => tableData, [tableData]);
+  const columns = useMemo(() => chartConfig, [chartConfig]);
+  const data = useMemo(() => chartData, [chartData]);
 
   const tableInstance = useTable(
     {
@@ -52,10 +53,13 @@ function TopCreatorTable(props) {
   )
   return (
     <>
-    <Card
+    <CardwithModal
       bg={cardColor}
       flexDirection='row'
       boxShadow={cardShadow}
+      tableConfig={tableConfig}
+      tableData={tableData}
+      tableName='地理分布详表'
     >
 
     
@@ -78,7 +82,7 @@ function TopCreatorTable(props) {
         </Flex>
         <Box overflowY="auto" maxHeight="430px">
         <Table {...getTableProps()} variant='simple' color='gray.500'>
-          <Thead>
+          <TheadwithNoBubble>
             {headerGroups.map((headerGroup, index) => (
               <Tr {...headerGroup.getHeaderGroupProps()} key={index}>
                 {headerGroup.headers.map((column, index) => (
@@ -98,7 +102,7 @@ function TopCreatorTable(props) {
                 ))}
               </Tr>
             ))}
-          </Thead>
+          </TheadwithNoBubble>
 
           <Tbody {...getTableBodyProps()}>
             {page.map((row, index) => {
@@ -165,7 +169,7 @@ function TopCreatorTable(props) {
 
       </Flex>
 
-      </Card>
+      </CardwithModal>
     </>
   );
 }

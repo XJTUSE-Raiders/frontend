@@ -33,34 +33,39 @@ export function CalendarButton (props) {
         fontWeight='500'
         color={textColorSecondary}
         borderRadius='7px'
+        onClick={e => {e.stopPropagation()}}
       >
         <Icon as={MdOutlineCalendarToday} color={textColorSecondary} me='4px' />
         {menu}
       </MenuButton>
       <MenuList>
         <MenuItem
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation();
             setMenu('Realtime')
           }}
         >
           Realtime
         </MenuItem>
         <MenuItem
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation();
             setMenu('Today')
           }}
         >
           This Today
         </MenuItem>
         <MenuItem
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation();
             setMenu('This Week')
           }}
         >
           This Week
         </MenuItem>
         <MenuItem
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation();
             setMenu('This Month')
           }}
         >

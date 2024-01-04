@@ -12,7 +12,7 @@ import {
 import React from "react";
 
 export default function ReturnFocus(props) {
-  const {isOpen, onOpen, onClose, children} = props;
+  const {isOpen, onOpen, onClose, title, children} = props;
 
   const finalRef = React.useRef()
 
@@ -21,17 +21,18 @@ export default function ReturnFocus(props) {
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose} size='6xl' useInert='false'>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>详细统计信息</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {children}
           </ModalBody>
 
           <ModalFooter>
+            <Button variant="ghost">下载</Button>
             <Button colorScheme="brand" mr={3} onClick={onClose}>
-              Close
+              关闭
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            
           </ModalFooter>
         </ModalContent>
       </Modal>

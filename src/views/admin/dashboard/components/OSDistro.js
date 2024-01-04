@@ -2,38 +2,28 @@
 import {
   Box,
   Flex,
-  Icon,
   Text,
   useColorModeValue,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button
 } from '@chakra-ui/react'
 // Custom components
 import Card from 'components/card/Card.js'
 import PieChart from 'components/charts/PieChart'
-import { pieChartData, pieChartOptions } from 'variables/charts'
-import { React, useState } from 'react'
-import { MdOutlineCalendarToday, MdArrowDropDown } from 'react-icons/md'
+import { React } from 'react'
 import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
+import CardwithModal from './CardwithModal'
 
 export default function Conversion (props) {
-  const { ...rest } = props
+  const { chartConfig, chartData, tableConfig, tableData, ...rest } = props
 
   // Chakra Color Mode
   const textColor = useColorModeValue('secondaryGray.900', 'white')
-  const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
-  const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
   const cardColor = useColorModeValue('white', 'navy.700')
   const cardShadow = useColorModeValue(
     '0px 18px 40px rgba(112, 144, 176, 0.12)',
     'unset'
   )
-  const [menu, setMenu] = useState('This Month')
   return (
-    <Card p='20px' align='center' direction='column' w='100%' {...rest}>
+    <CardwithModal tableConfig={tableConfig} tableData={tableData} tableName='浏览器分布详表' p='20px' align='center' direction='column' w='100%' {...rest}>
       <Flex
         px={{ base: '0px', '2xl': '10px' }}
         justifyContent='space-between'
@@ -50,8 +40,8 @@ export default function Conversion (props) {
       <PieChart
         h='100%'
         w='100%'
-        chartData={pieChartData}
-        chartOptions={pieChartOptions}
+        chartData={chartData}
+        chartOptions={chartConfig}
       />
       <Card
         bg={cardColor}
@@ -156,6 +146,6 @@ export default function Conversion (props) {
           </Flex>
         </Flex>
       </Card>
-    </Card>
+    </CardwithModal>
   )
 }

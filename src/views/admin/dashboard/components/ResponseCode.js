@@ -10,6 +10,7 @@ import {
   Thead,
   Tr,
   useColorModeValue,
+  useDisclosure
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import {
@@ -21,16 +22,19 @@ import {
 
 // Custom components
 import Card from "components/card/Card";
-import Menu from "components/menu/MainMenu";
+import CommonModal from 'views/admin/dashboard/components/CommonModal'
+import DetailTable from "views/admin/dashboard/components/DetailTable";
 import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
 
 // Assets
 import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
+import TheadwithNoBubble from "./TheadwithNoBubble";
+import CardwithModal from "./CardwithModal";
 export default function ColumnsTable(props) {
-  const { columnsData, tableData } = props;
+  const { chartConfig, chartData, tableConfig, tableData } = props;
 
-  const columns = useMemo(() => columnsData, [columnsData]);
-  const data = useMemo(() => tableData, [tableData]);
+  const columns = useMemo(() => chartConfig, [chartConfig]);
+  const data = useMemo(() => chartData, [chartData]);
 
   const tableInstance = useTable(
     {
@@ -54,12 +58,16 @@ export default function ColumnsTable(props) {
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+
   return (
-    <Card
+    <CardwithModal
       direction='column'
       w='100%'
       px='0px'
-      overflowX={{ sm: "scroll", lg: "hidden" }}>
+      overflowX={{ sm: "scroll", lg: "hidden" }} 
+      tableConfig={tableConfig}
+      tableData={tableData}
+      tableName='访问抵达性统计详表'>
       <Flex px='25px' justify='space-between' mb='10px' align='center'>
         <Text
           color={textColor}
@@ -71,7 +79,7 @@ export default function ColumnsTable(props) {
         <CalendarButton />
       </Flex>
       <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
-        <Thead>
+        <TheadwithNoBubble>
           {headerGroups.map((headerGroup, index) => (
             <Tr {...headerGroup.getHeaderGroupProps()} key={index}>
               {headerGroup.headers.map((column, index) => (
@@ -91,7 +99,7 @@ export default function ColumnsTable(props) {
               ))}
             </Tr>
           ))}
-        </Thead>
+        </TheadwithNoBubble>
         <Tbody {...getTableBodyProps()}>
           {page.map((row, index) => {
             prepareRow(row);
@@ -167,6 +175,6 @@ export default function ColumnsTable(props) {
           })}
         </Tbody>
       </Table>
-    </Card>
+    </CardwithModal>
   );
 }

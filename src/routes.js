@@ -24,18 +24,18 @@ import SignInCentered from "views/auth/signIn";
 
 const routes = [
   {
-    name: "Main Dashboard",
-    layout: "/admin",
-    path: "/default",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: MainDashboard,
-  },
-  {
     name: "Dashboard",
     layout: "/admin",
     path: "/dashboard",
     icon: <Icon as={MdAssistantNavigation} width='20px' height='20px' color='inherit' />,
     component: Dashboard,
+  },
+  {
+    name: "原 Dashboard",
+    layout: "/admin",
+    path: "/default",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: MainDashboard,
   },
   {
     name: "NFT Marketplace",

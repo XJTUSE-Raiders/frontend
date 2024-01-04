@@ -16,12 +16,24 @@ import ISPDistro from "views/admin/dashboard/components/ISPDistro";
 import GeoDistro from "views/admin/dashboard/components/GeoDistro";
 import BroswerDistro from "views/admin/dashboard/components/BroswerDistro";
 import OSDistro from "views/admin/dashboard/components/OSDistro";
-import {GeoConfig} from "views/admin/dashboard/varibles/GeoConfig";
-import GeoData from "views/admin/dashboard/varibles/GeoData.json";
 import PopularURI from "views/admin/dashboard/components/PopularURI";
 import ResponseCode from "views/admin/dashboard/components/ResponseCode";
-import {CodeConfig} from "views/admin/dashboard/varibles/CodeConfig";
-import CodeData from "views/admin/dashboard/varibles/CodeData.json";
+
+import {GeoConfig} from "views/admin/dashboard/varibles/chart/GeoConfig";
+import GeoData from "views/admin/dashboard/varibles/chart/GeoData.json";
+import {CodeChartConfig} from "views/admin/dashboard/varibles/chart/CodeConfig";
+import CodeChartData from "views/admin/dashboard/varibles/chart/CodeData.json";
+import {URITableConfig} from "views/admin/dashboard/varibles/table/URIConfig";
+import URITableData from "views/admin/dashboard/varibles/table/URIData.json";
+import { pieChartData, pieChartOptions } from 'variables/charts'
+import {
+  barChartDataDailyTraffic,
+  barChartOptionsDailyTraffic,
+} from "variables/charts";
+import {
+  barChartDataConsumption,
+  barChartOptionsConsumption,
+} from "variables/charts";
 import { 
   FcReadingEbook,
   FcClock,
@@ -82,21 +94,45 @@ export default function DashReports() {
       </SimpleGrid>
       <SimpleGrid columns={{base:1,md:1,xl:2}}  gap='20px' mb='20px'>
           <TotalVisit />
-          <ISPDistro />
+          <ISPDistro 
+            chartData={barChartDataConsumption}
+            chartConfig={barChartOptionsConsumption}
+            tableConfig={URITableConfig}
+            tableData={URITableData}
+          />
       </SimpleGrid>
       <SimpleGrid columns={{base:1, md:2, xl:3}} gap='20px' mb='20px'>
-          <OSDistro />
-          <GeoDistro 
-            tableData={GeoData}
-            columnsData={GeoConfig}
+          <OSDistro 
+            chartData={pieChartData}
+            chartConfig={pieChartOptions}
+            tableConfig={URITableConfig}
+            tableData={URITableData}
           />
-          <BroswerDistro />
+          <GeoDistro 
+            chartData={GeoData}
+            chartConfig={GeoConfig}
+            tableConfig={URITableConfig}
+            tableData={URITableData}
+          />
+          <BroswerDistro 
+            chartData={pieChartData}
+            chartConfig={pieChartOptions}
+            tableConfig={URITableConfig}
+            tableData={URITableData}
+          />
       </SimpleGrid>
       <SimpleGrid columns={{base:1, md:2, xl:2}} gap='20px' mb='20px'>
-          <PopularURI />
+          <PopularURI 
+            tableConfig={URITableConfig}
+            tableData={URITableData}
+            chartOptions={barChartOptionsDailyTraffic}
+            chartData={barChartDataDailyTraffic}
+          />
           <ResponseCode 
-            columnsData={CodeConfig}
-            tableData={CodeData}
+            chartConfig={CodeChartConfig}
+            chartData={CodeChartData}
+            tableConfig={URITableConfig}
+            tableData={URITableData}
           />
       </SimpleGrid>
     </Box>

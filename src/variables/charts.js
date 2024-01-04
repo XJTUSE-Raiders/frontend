@@ -124,7 +124,7 @@ export const barChartOptionsConsumption = {
   chart: {
     stacked: true,
     toolbar: {
-      show: true,
+      show: false,
     },
   },
   tooltip: {
@@ -194,7 +194,7 @@ export const barChartOptionsConsumption = {
     colors: ["#5E37FF", "#6AD2FF", "#E1E9F8"],
   },
   legend: {
-    show: false,
+    show: true,
   },
   colors: ["#5E37FF", "#6AD2FF", "#E1E9F8"],
   dataLabels: {

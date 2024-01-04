@@ -1,4 +1,4 @@
-export const CodeConfig = [
+export const CodeChartConfig = [
   {
     Header: "状态码",
     accessor: "name",
