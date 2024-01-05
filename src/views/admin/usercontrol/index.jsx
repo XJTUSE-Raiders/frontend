@@ -5,6 +5,7 @@ import AdminBanner from "views/admin/usercontrol/components/AdminBanner";
 import UserManage from "views/admin/usercontrol/components/UserManage"
 import TransferSettings from "views/admin/usercontrol/components/TransferSettings"
 import General from "views/admin/profile/components/General";
+import PermMatrix from "views/admin/usercontrol/components/PermMatrix"
 
 // Assets
 import banner from "assets/img/auth/banner.png";
@@ -15,7 +16,7 @@ export default function Overview() {
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
-      <Grid
+      <Grid gridAutoFlow='true'
         templateColumns={{
           base: "1fr",
           lg: "1.34fr 1fr 1.62fr",
@@ -48,11 +49,14 @@ export default function Overview() {
           pb={{ base: "100px", lg: "20px" }}
         />
       </Grid>
-      <General
+      <Box as="flex" flexShrink='0'>
+      <PermMatrix
           gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
-          minH='365px'
+          maxHeight='100%'
           pe='20px'
         />
+      </Box>
+
       <Grid
         mb='20px'
         templateColumns={{

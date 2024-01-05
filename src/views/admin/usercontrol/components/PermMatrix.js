@@ -1,9 +1,10 @@
 // Chakra imports
-import { SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import { Flex, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "components/card/Card.js";
 import React from "react";
-import Information from "views/admin/profile/components/Information";
+import RoleBox from "views/admin/usercontrol/components/RoleBox"
+import PermBox from "views/admin/usercontrol/components/PermBox"
 
 // Assets
 export default function GeneralInformation(props) {
@@ -16,7 +17,10 @@ export default function GeneralInformation(props) {
     "unset"
   );
   return (
-    <Card mb={{ base: "0px", "2xl": "20px" }} {...rest}>
+    
+
+    
+    <Card mb={{ base: "0px", "2xl": "20px" }}  {...rest}>
       <Text
         color={textColorPrimary}
         fontWeight='bold'
@@ -25,37 +29,18 @@ export default function GeneralInformation(props) {
         mb='4px'>
         角色和权限管理
       </Text>
-      <SimpleGrid columns='2' gap='20px'>
-        <Information
+      <SimpleGrid columns='1' gap='20px'>
+        <Flex>
+          <RoleBox title='User.Charts' value='用户查看图表的权限' />
+        </Flex>
+
+        <PermBox
           boxShadow={cardShadow}
-          title='Education'
-          value='Stanford University'
+          check='false'
+          title='User.Charts.ISP'
+          value='查看 ISP 数据分布情况'
         />
-        <Information
-          boxShadow={cardShadow}
-          title='Languages'
-          value='English, Spanish, Italian'
-        />
-        <Information
-          boxShadow={cardShadow}
-          title='Department'
-          value='Product Design'
-        />
-        <Information
-          boxShadow={cardShadow}
-          title='Work History'
-          value='Google, Facebook'
-        />
-        <Information
-          boxShadow={cardShadow}
-          title='Organization'
-          value='Simmmple Web LLC'
-        />
-        <Information
-          boxShadow={cardShadow}
-          title='Birthday'
-          value='20 July 1986'
-        />
+
       </SimpleGrid>
     </Card>
   );
