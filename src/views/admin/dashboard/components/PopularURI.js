@@ -6,20 +6,15 @@ import {
   Flex,
   Text,
   useColorModeValue,
-  useDisclosure
 } from '@chakra-ui/react'
 import BarChart from 'components/charts/BarChart'
 
 // Custom components
-import Card from 'components/card/Card.js'
 import { CalendarButton } from 'views/admin/dashboard/components/CalendarButton'
-import CommonModal from 'views/admin/dashboard/components/CommonModal'
-import DetailTable from 'views/admin/dashboard/components/DetailTable'
 import CardwithModal from './CardwithModal'
 
 export default function DailyTraffic (props) {
   const { tableConfig, tableData, chartOptions, chartData, ...rest } = props
-  const { isOpen, onOpen, onClose } = useDisclosure()
 
   // Chakra Color Mode
   const textColor = useColorModeValue('secondaryGray.900', 'white')

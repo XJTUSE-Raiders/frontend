@@ -8,7 +8,6 @@ import {
   MdLock,
   MdOutlineShoppingCart,
   MdAssistantNavigation,
-  MdAddToHomeScreen,
 } from "react-icons/md";
 
 // Admin Imports
@@ -25,7 +24,7 @@ import SignInCentered from "views/auth/signIn";
 
 const routes = [
   {
-    name: "Dashboard",
+    name: "数据仪表盘",
     layout: "/admin",
     path: "/dashboard",
     icon: <Icon as={MdAssistantNavigation} width='20px' height='20px' color='inherit' />,

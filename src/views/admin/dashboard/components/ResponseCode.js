@@ -7,10 +7,8 @@ import {
   Td,
   Text,
   Th,
-  Thead,
   Tr,
   useColorModeValue,
-  useDisclosure
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import {
@@ -21,9 +19,6 @@ import {
 } from "react-table";
 
 // Custom components
-import Card from "components/card/Card";
-import CommonModal from 'views/admin/dashboard/components/CommonModal'
-import DetailTable from "views/admin/dashboard/components/DetailTable";
 import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
 
 // Assets

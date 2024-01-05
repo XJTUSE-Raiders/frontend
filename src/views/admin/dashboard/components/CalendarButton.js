@@ -13,13 +13,11 @@ import { React, useState } from 'react'
 import { MdOutlineCalendarToday } from 'react-icons/md'
 
 export function CalendarButton (props) {
-  const { ...rest } = props
 
   const [menu, setMenu] = useState('Realtime')
 
   // Chakra Color Mode
 
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
   const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
 

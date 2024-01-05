@@ -12,7 +12,7 @@ import {
 import React from "react";
 
 export default function ReturnFocus(props) {
-  const {isOpen, onOpen, onClose, title, children} = props;
+  const {isOpen, onClose, children} = props;
 
   const finalRef = React.useRef()
 

@@ -1,23 +1,16 @@
 // Chakra imports
 import {
   Box,
-  Button,
   Flex,
   Icon,
-  Menu,
   Text,
-  MenuButton,
-  MenuList,
-  MenuItem,
   useColorModeValue
 } from '@chakra-ui/react'
-import { MdArrowDropDown } from 'react-icons/md'
 // Custom components
 import Card from 'components/card/Card.js'
 import LineChart from 'components/charts/LineChart'
-import {React, useState} from 'react'
+import {React } from 'react'
 import { IoCheckmarkCircle } from 'react-icons/io5'
-import { MdOutlineCalendarToday } from 'react-icons/md'
 import {
   lineChartDataTotalSpent,
   lineChartOptionsTotalSpent
@@ -27,24 +20,9 @@ import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
 export default function TotalSpent (props) {
   const { ...rest } = props
 
-  const [menu, setMenu] = useState("This Month");
-
-
   // Chakra Color Mode
 
   const textColor = useColorModeValue('secondaryGray.900', 'white')
-  const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
-  const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
-  const iconColor = useColorModeValue('brand.500', 'white')
-  const bgButton = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
-  const bgHover = useColorModeValue(
-    { bg: 'secondaryGray.400' },
-    { bg: 'whiteAlpha.50' }
-  )
-  const bgFocus = useColorModeValue(
-    { bg: 'secondaryGray.300' },
-    { bg: 'whiteAlpha.100' }
-  )
   return (
     <Card
       justifyContent='center'

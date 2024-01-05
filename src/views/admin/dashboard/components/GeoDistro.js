@@ -1,16 +1,13 @@
 import {
   Avatar,
   Box,
-  Button,
   Flex,
   Progress,
   Table,
-  TableContainer,
   Tbody,
   Td,
   Text,
   Th,
-  Thead,
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";

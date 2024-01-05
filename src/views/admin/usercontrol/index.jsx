@@ -5,8 +5,6 @@ import AdminBanner from "views/admin/usercontrol/components/AdminBanner";
 import UserManage from "views/admin/usercontrol/components/UserManage"
 import TransferSettings from "views/admin/usercontrol/components/TransferSettings"
 import General from "views/admin/profile/components/General";
-import Storage from "views/admin/profile/components/Storage";
-import Upload from "views/admin/profile/components/Upload";
 
 // Assets
 import banner from "assets/img/auth/banner.png";
