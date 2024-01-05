@@ -2,14 +2,8 @@
 import {
   Box,
   Flex,
-  Icon,
   Text,
   useColorModeValue,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button
 } from '@chakra-ui/react'
 // Custom components
 import Card from 'components/card/Card.js'

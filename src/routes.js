@@ -14,6 +14,7 @@ import {
 // Admin Imports
 import MainDashboard from "views/admin/default";
 import Dashboard from "views/admin/dashboard";
+import UserControl from "views/admin/usercontrol";
 import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
@@ -29,6 +30,13 @@ const routes = [
     path: "/dashboard",
     icon: <Icon as={MdAssistantNavigation} width='20px' height='20px' color='inherit' />,
     component: Dashboard,
+  },
+  {
+    name: "用户管理面板",
+    layout: "/admin",
+    path: "/usercontrol",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: UserControl,
   },
   {
     name: "原 Dashboard",
