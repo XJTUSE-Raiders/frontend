@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Grid, TableContainer, Tbody, Table, Flex } from "@chakra-ui/react";
 
 // Custom components
 import AdminBanner from "views/admin/usercontrol/components/AdminBanner";
@@ -11,10 +11,12 @@ import PermMatrix from "views/admin/usercontrol/components/PermMatrix"
 import banner from "assets/img/auth/banner.png";
 import avatar from "assets/img/avatars/avatar4.png";
 import React from "react";
+import Card from "components/card/Card";
 
 export default function Overview() {
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+      <Flex>
       {/* Main Fields */}
       <Grid gridAutoFlow='true'
         templateColumns={{
@@ -49,29 +51,10 @@ export default function Overview() {
           pb={{ base: "100px", lg: "20px" }}
         />
       </Grid>
-      <Box as="flex" flexShrink='0'>
-      <PermMatrix
-          gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
-          maxHeight='100%'
-          pe='20px'
-        />
-      </Box>
-
-      <Grid
-        mb='20px'
-        templateColumns={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1.34fr 1.62fr 1fr",
-        }}
-        templateRows={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}>
-
-      </Grid>
+      </Flex>
+      <Flex >
+        <PermMatrix pe='20px' minH='300px'/>
+        </Flex>
     </Box>
   );
 }

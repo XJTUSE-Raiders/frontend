@@ -20,9 +20,8 @@ export default function Information (props) {
   const bg = useColorModeValue('white', 'navy.700')
   return (
     <Card bg={bg} {...rest}>
-      <Grid templateColumns='7fr 1fr 1fr 1fr 1fr 1fr' >
-        <Flex>
-          <Text
+      <Grid templateColumns='1fr 3fr 1fr 1fr 1fr 1fr 1fr 1fr' >
+      <Text
             color={textColorPrimary}
             fontWeight='550'
             fontSize='md'
@@ -40,7 +39,7 @@ export default function Information (props) {
           >
             {value}
           </Text>
-        </Flex>
+        <Flex />
         <Checkbox defaultChecked={check} mx='auto' />
         <Checkbox defaultChecked={check} mx='auto' />
         <Checkbox defaultChecked={check} mx='auto' />

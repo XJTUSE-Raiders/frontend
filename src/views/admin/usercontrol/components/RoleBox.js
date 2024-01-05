@@ -20,9 +20,8 @@ export default function Information (props) {
   return (
     
     <Card bg='brand.500'  {...rest}>
-      <Grid templateColumns='7fr 1fr 1fr 1fr 1fr 1fr'>
-        <Flex>
-          <Text
+      <Grid templateColumns='1fr 3fr 1fr 1fr 1fr 1fr 1fr 1fr'>
+      <Text
             color={textColorPrimary}
             fontWeight='550'
             fontSize='md'
@@ -37,10 +36,11 @@ export default function Information (props) {
             fontSize='md'
             mx='3px'
             my='auto'
+            align='left'
           >
             {value}
           </Text>
-        </Flex>
+        <Flex />
       
         <Badge colorScheme='red' variant='solid' textAlign='center' mx='auto' w='80%'>
           根用户
