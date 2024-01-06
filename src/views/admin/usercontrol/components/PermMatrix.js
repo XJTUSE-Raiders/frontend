@@ -22,12 +22,6 @@ export default function GeneralInformation (props) {
   const { ...rest } = props
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
-  const textColorSecondary = 'gray.400'
-  const cardShadow = useColorModeValue(
-    '0px 18px 40px rgba(112, 144, 176, 0.12)',
-    'unset'
-  )
-  const staticShadow = '0px 18px 40px rgba(112, 144, 176, 0.12)'
   return (
     <Card mb={{ base: '0px', '2xl': '20px' }} {...rest}>
       <Flex direction='row'>
@@ -45,7 +39,7 @@ export default function GeneralInformation (props) {
         </Flex>
         <Spacer />
         <Flex alignSelf='flex-end' my='auto' py='auto'>
-          <Button >复位修改</Button>
+          <Button mx='5px'>复位修改</Button>
           <Button variant='brand'>保存修改</Button>
         </Flex>
       </Flex>
@@ -55,12 +49,17 @@ export default function GeneralInformation (props) {
         <Flex w='1400px'>
           <RoleBox title='User.Charts' value='用户查看图表的权限' />
         </Flex>
-        <Flex w='1400px'>
+        <Flex w='1400px' direction='column'>
           <PermBox
-            boxShadow={staticShadow}
             check='false'
             title='User.Charts.ISP'
             value='查看 ISP 数据分布情况'
+          />
+          <PermBox
+            // boxShadow={staticShadow}
+            check='false'
+            title='User.Charts.Geo'
+            value='查看地理位置分布情况'
           />
         </Flex>
         {/* </SimpleGrid> */}

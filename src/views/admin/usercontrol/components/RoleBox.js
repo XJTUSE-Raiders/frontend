@@ -16,7 +16,8 @@ export default function Information (props) {
   const { title, value, ...rest } = props
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue('white', 'white')
-  const textColorSecondary = 'gray.200'
+  const titleColorScheme = useColorModeValue('whiteAlpha','gray')
+  const textColorSecondary = 'white'
   return (
     
     <Card bg='brand.500'  {...rest}>
@@ -28,7 +29,7 @@ export default function Information (props) {
             mx='3px'
             my='auto'
           >
-            <Code colorScheme='whiteAlpha'>{title}</Code>
+            <Code colorScheme={titleColorScheme}>{title}</Code>
           </Text>
           <Text
             fontWeight='550'
@@ -54,7 +55,7 @@ export default function Information (props) {
         <Badge colorScheme='blue' textAlign='center' mx='auto' w='80%'>
           用户
         </Badge>
-        <Badge colorScheme='whiteAlpha' textAlign='center' mx='auto' w='80%'>
+        <Badge colorScheme='gray' textAlign='center' mx='auto' w='80%'>
           访客
         </Badge>
       </Grid>

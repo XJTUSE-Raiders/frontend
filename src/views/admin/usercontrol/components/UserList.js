@@ -1,23 +1,23 @@
-import { useDisclosure } from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 import Card from "components/card/Card";
-import CommonModal from 'views/admin/dashboard/components/CommonModal'
+import UserListModal from 'views/admin/usercontrol/components/UserListModal'
 import DetailTable from 'views/admin/dashboard/components/DetailTable'
-function CardwithModal(props) {
-  const { children, tableConfig, tableData, tableName, ...rest } = props;
+import UserListTable from 'views/admin/usercontrol/components/UserListTable'
+function UserList(props) {
+  const { children, tableConfig, tableData, ...rest } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Card {...rest}  onClick={onOpen}>
+    <Button {...rest}  onClick={onOpen}>
       {children}
-      <CommonModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-      <DetailTable 
+      <UserListModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+      <UserListTable 
           columnsData={tableConfig}
           tableData={tableData}
-          tableName={tableName}
       />
-    </CommonModal>
-    </Card>    
+    </UserListModal>
+    </Button>    
   );
 }
 
-export default CardwithModal;
+export default UserList;

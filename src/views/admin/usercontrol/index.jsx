@@ -1,17 +1,18 @@
-import { Box, Grid, TableContainer, Tbody, Table, Flex } from "@chakra-ui/react";
+import { Box, Grid, Flex } from "@chakra-ui/react";
 
 // Custom components
 import AdminBanner from "views/admin/usercontrol/components/AdminBanner";
 import UserManage from "views/admin/usercontrol/components/UserManage"
 import TransferSettings from "views/admin/usercontrol/components/TransferSettings"
-import General from "views/admin/profile/components/General";
 import PermMatrix from "views/admin/usercontrol/components/PermMatrix"
 
 // Assets
 import banner from "assets/img/auth/banner.png";
 import avatar from "assets/img/avatars/avatar4.png";
 import React from "react";
-import Card from "components/card/Card";
+
+import {UserConfig} from "views/admin/usercontrol/varibles/UserConfig";
+import UserData from "views/admin/usercontrol/varibles/UserData.json";
 
 export default function Overview() {
   return (
@@ -40,6 +41,8 @@ export default function Overview() {
         />
         <UserManage
           gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
+          tableConfig={UserConfig}
+          tableData={UserData}
         />
         <TransferSettings
           gridArea={{
@@ -52,9 +55,9 @@ export default function Overview() {
         />
       </Grid>
       </Flex>
-      <Flex >
+      <Flex>
         <PermMatrix pe='20px' minH='300px'/>
-        </Flex>
+      </Flex>
     </Box>
   );
 }
