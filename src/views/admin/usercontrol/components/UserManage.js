@@ -1,6 +1,5 @@
 // Chakra imports
 import {
-  Button,
   Icon,
   Text,
   useColorModeValue,

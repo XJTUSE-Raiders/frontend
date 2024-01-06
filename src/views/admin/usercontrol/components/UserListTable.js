@@ -9,10 +9,8 @@ import {
   Tr,
   useColorModeValue,
   IconButton,
-  Spacer,
   Button,
   Checkbox,
-  TableCaption
 } from '@chakra-ui/react'
 import { MdOutlineRefresh } from "react-icons/md";
 import React, { useMemo } from 'react'
@@ -26,7 +24,7 @@ import {
 // Custom components
 import Card from 'components/card/Card'
 export default function ColumnsTable (props) {
-  const { columnsData, tableData, tableName } = props
+  const { columnsData, tableData } = props
 
   const columns = useMemo(() => columnsData, [columnsData])
   const data = useMemo(() => tableData, [tableData])

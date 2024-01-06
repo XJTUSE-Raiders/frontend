@@ -4,7 +4,6 @@ import {
   Text,
   useColorModeValue,
   Flex,
-  Spacer,
   Badge,
   Code
 } from '@chakra-ui/react'

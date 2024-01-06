@@ -1,7 +1,5 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
-import Card from "components/card/Card";
 import UserListModal from 'views/admin/usercontrol/components/UserListModal'
-import DetailTable from 'views/admin/dashboard/components/DetailTable'
 import UserListTable from 'views/admin/usercontrol/components/UserListTable'
 function UserList(props) {
   const { children, tableConfig, tableData, ...rest } = props;

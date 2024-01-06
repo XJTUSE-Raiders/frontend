@@ -5,7 +5,6 @@ import {
   Text,
   useColorModeValue,
   Flex,
-  Spacer,
   Code
 } from '@chakra-ui/react'
 // Custom components
