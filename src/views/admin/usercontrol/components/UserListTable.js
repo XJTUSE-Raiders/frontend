@@ -23,6 +23,9 @@ import {
 
 // Custom components
 import Card from 'components/card/Card'
+import UserModifyButton from './UserModifyButton';
+import AssignRoleButton from './AssignRoleButton';
+import DeleteButton from './DeleteButton';
 export default function ColumnsTable (props) {
   const { columnsData, tableData } = props
 
@@ -59,15 +62,15 @@ export default function ColumnsTable (props) {
       overflowX={{ sm: 'scroll', lg: 'hidden' }}
     >
       <Flex my={1}>
-        <Button size='md' colorScheme='brand' mx={1}>
+        <UserModifyButton size='md' colorScheme='brand' modalName='增加新用户' mx={1}>
           增加用户
-        </Button>
-        <Button size='md' colorScheme='brand' mx={1}>
+        </UserModifyButton>
+        <AssignRoleButton size='md' colorScheme='brand' mx={1}>
           分配用户组
-        </Button>
-        <Button size='md' colorScheme='red' mx={1}>
+        </AssignRoleButton>
+        <DeleteButton size='md' colorScheme='red' mx={1}>
           删除用户
-        </Button>
+        </DeleteButton>
         <IconButton colorScheme='brand' icon={<MdOutlineRefresh size='60%' />} mx={1} />
       </Flex>
       <Table
@@ -171,9 +174,9 @@ export default function ColumnsTable (props) {
                   )
                 })}
                 <Td textAlign='start'>
-                  <Button colorScheme='brand' size='sm'>
+                  <UserModifyButton colorScheme='brand' size='sm' modalName='修改用户信息'>
                     修改用户
-                  </Button>
+                  </UserModifyButton>
                 </Td>
               </Tr>
             )

@@ -1,12 +1,7 @@
 // Chakra imports
 import {
   Flex,
-  SimpleGrid,
-  Table,
-  TableContainer,
-  Tbody,
   Text,
-  Box,
   useColorModeValue,
   Button,
   Spacer
@@ -26,16 +21,16 @@ export default function GeneralInformation (props) {
     <Card mb={{ base: '0px', '2xl': '20px' }} {...rest}>
       <Flex direction='row'>
         <Flex>
-        <Text
-          color={textColorPrimary}
-          fontWeight='bold'
-          fontSize='2xl'
-          mt='10px'
-          mb='20px'
-          alignSelf='flex-start'
-        >
-          角色和权限管理
-        </Text>
+          <Text
+            color={textColorPrimary}
+            fontWeight='bold'
+            fontSize='2xl'
+            mt='10px'
+            mb='20px'
+            alignSelf='flex-start'
+          >
+            角色和权限管理
+          </Text>
         </Flex>
         <Spacer />
         <Flex alignSelf='flex-end' my='auto' py='auto'>
@@ -62,7 +57,22 @@ export default function GeneralInformation (props) {
             value='查看地理位置分布情况'
           />
         </Flex>
-        {/* </SimpleGrid> */}
+        <Flex w='1400px'>
+          <RoleBox title='Manage.User' value='管理用户的权限' />
+        </Flex>
+        <Flex  w='1400px' direction='column'>
+          <PermBox
+            check='false'
+            title='Manage.User.Name'
+            value='管理用户名称'
+          />
+          <PermBox
+            // boxShadow={staticShadow}
+            check='false'
+            title='Manage.User.Role'
+            value='管理用户角色'
+          />
+        </Flex>
       </Flex>
     </Card>
   )
