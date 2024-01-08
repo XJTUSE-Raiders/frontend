@@ -22,7 +22,7 @@ import { VSeparator } from 'components/separator/Separator'
 import LogButton from './LogButton'
 
 export default function ContainerCard (props) {
-  const { containerName, upTime, status, reportTime, isOk, ...rest } = props
+  const { containerName, version, upTime, status, reportTime, isOk, ...rest } = props
   const textColor = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'secondaryGray.600'
   function okStatus () {
@@ -54,9 +54,14 @@ export default function ContainerCard (props) {
             <Text fontSize='2xl' fontWeight='bold'>
               Service
             </Text>
-            <Text fontSize='xl' as='samp'>
+            <Flex w='100%'>
+            <Text fontSize='xl' as='samp' mr={2}>
               {containerName}
             </Text>
+            <Badge colorScheme='blue' variant='outline' size='md' verticalAlign='center' alignSelf='center'>{version}</Badge>         
+            </Flex>
+
+
           </Flex>
 
           <Icon as={okStatus()} w='50px' h='auto' color='gray.400' />
