@@ -6,7 +6,8 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  useColorModeValue
+  useColorModeValue,
+  Text
 } from '@chakra-ui/react'
 import { MdArrowDropDown } from 'react-icons/md'
 import { React, useState } from 'react'
@@ -37,6 +38,15 @@ export function CalendarButton (props) {
         {menu}
       </MenuButton>
       <MenuList>
+      <MenuItem
+          onClick={e => {
+            e.stopPropagation();
+            setMenu('Future')
+          }}
+        >
+          <Text fontWeight='bolder' fontStyle='italic'>Future
+          </Text>
+        </MenuItem>
         <MenuItem
           onClick={e => {
             e.stopPropagation();
