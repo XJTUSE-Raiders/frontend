@@ -8,12 +8,14 @@ import {
   MdLock,
   MdOutlineShoppingCart,
   MdAssistantNavigation,
+  MdSettingsSuggest
 } from "react-icons/md";
 
 // Admin Imports
 import MainDashboard from "views/admin/default";
 import Dashboard from "views/admin/dashboard";
 import UserControl from "views/admin/usercontrol";
+import SystemMonitor from 'views/admin/systemMonitor'
 import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
@@ -36,6 +38,13 @@ const routes = [
     path: "/usercontrol",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: UserControl,
+  },
+  {
+    name: "系统管理面板",
+    layout: "/admin",
+    path: "/SystemMonitor",
+    icon: <Icon as={MdSettingsSuggest} width='20px' height='20px' color='inherit' />,
+    component: SystemMonitor,
   },
   {
     name: "原 Dashboard",
