@@ -8,38 +8,39 @@ import {
   Text,
   Th,
   Tr,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import React, { useMemo } from "react";
+  useColorModeValue
+} from '@chakra-ui/react'
+import React, { useMemo } from 'react'
 import {
   useGlobalFilter,
   usePagination,
   useSortBy,
-  useTable,
-} from "react-table";
+  useTable
+} from 'react-table'
 
 // Custom components
-import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
+import { CalendarButton } from 'views/admin/dashboard/components/CalendarButton'
 
 // Assets
-import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
-import TheadwithNoBubble from "./TheadwithNoBubble";
-import CardwithModal from "./CardwithModal";
-export default function ColumnsTable(props) {
-  const { chartConfig, chartData, tableConfig, tableData } = props;
+import { MdCheckCircle, MdCancel, MdOutlineError } from 'react-icons/md'
+import TheadwithNoBubble from './TheadwithNoBubble'
+import CardwithModal from './CardwithModal'
+import ModeSwitch from './ModeSwitch'
+export default function ColumnsTable (props) {
+  const { chartConfig, chartData, tableConfig, tableData } = props
 
-  const columns = useMemo(() => chartConfig, [chartConfig]);
-  const data = useMemo(() => chartData, [chartData]);
+  const columns = useMemo(() => chartConfig, [chartConfig])
+  const data = useMemo(() => chartData, [chartData])
 
   const tableInstance = useTable(
     {
       columns,
-      data,
+      data
     },
     useGlobalFilter,
     useSortBy,
     usePagination
-  );
+  )
 
   const {
     getTableProps,
@@ -47,31 +48,36 @@ export default function ColumnsTable(props) {
     headerGroups,
     page,
     prepareRow,
-    initialState,
-  } = tableInstance;
-  initialState.pageSize = 5;
+    initialState
+  } = tableInstance
+  initialState.pageSize = 5
 
-  const textColor = useColorModeValue("secondaryGray.900", "white");
-  const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+  const textColor = useColorModeValue('secondaryGray.900', 'white')
+  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
 
   return (
     <CardwithModal
       direction='column'
       w='100%'
       px='0px'
-      overflowX={{ sm: "scroll", lg: "hidden" }} 
+      overflowX={{ sm: 'scroll', lg: 'hidden' }}
       tableConfig={tableConfig}
       tableData={tableData}
-      tableName='访问抵达性统计详表'>
+      tableName='访问抵达性统计详表'
+    >
       <Flex px='25px' justify='space-between' mb='10px' align='center'>
         <Text
           color={textColor}
           fontSize='22px'
           fontWeight='700'
-          lineHeight='100%'>
+          lineHeight='100%'
+        >
           访问抵达性统计
         </Text>
-        <CalendarButton />
+        <Flex direction='column'>
+          <ModeSwitch isTraffic='false'></ModeSwitch>
+          <CalendarButton />
+        </Flex>
       </Flex>
       <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
         <TheadwithNoBubble>
@@ -82,13 +88,15 @@ export default function ColumnsTable(props) {
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   pe='10px'
                   key={index}
-                  borderColor={borderColor}>
+                  borderColor={borderColor}
+                >
                   <Flex
                     justify='space-between'
                     align='center'
-                    fontSize={{ sm: "10px", lg: "12px" }}
-                    color='gray.400'>
-                    {column.render("Header")}
+                    fontSize={{ sm: '10px', lg: '12px' }}
+                    color='gray.400'
+                  >
+                    {column.render('Header')}
                   </Flex>
                 </Th>
               ))}
@@ -97,18 +105,18 @@ export default function ColumnsTable(props) {
         </TheadwithNoBubble>
         <Tbody {...getTableBodyProps()}>
           {page.map((row, index) => {
-            prepareRow(row);
+            prepareRow(row)
             return (
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
-                  let data = "";
-                  if (cell.column.Header === "状态码") {
+                  let data = ''
+                  if (cell.column.Header === '状态码') {
                     data = (
                       <Text color={textColor} fontSize='sm' fontWeight='700'>
                         {cell.value}
                       </Text>
-                    );
-                  } else if (cell.column.Header === "可访问性") {
+                    )
+                  } else if (cell.column.Header === '可访问性') {
                     data = (
                       <Flex align='center'>
                         <Icon
@@ -116,20 +124,20 @@ export default function ColumnsTable(props) {
                           h='24px'
                           me='5px'
                           color={
-                            cell.value === "正常"
-                              ? "green.500"
-                              : cell.value === "故障"
-                              ? "red.500"
-                              : cell.value === "未知"
-                              ? "orange.500"
+                            cell.value === '正常'
+                              ? 'green.500'
+                              : cell.value === '故障'
+                              ? 'red.500'
+                              : cell.value === '未知'
+                              ? 'orange.500'
                               : null
                           }
                           as={
-                            cell.value === "正常"
+                            cell.value === '正常'
                               ? MdCheckCircle
-                              : cell.value === "故障"
+                              : cell.value === '故障'
                               ? MdCancel
-                              : cell.value === "未知"
+                              : cell.value === '未知'
                               ? MdOutlineError
                               : null
                           }
@@ -138,8 +146,8 @@ export default function ColumnsTable(props) {
                           {cell.value}
                         </Text>
                       </Flex>
-                    );
-                  } else if (cell.column.Header === "数量") {
+                    )
+                  } else if (cell.column.Header === '数量') {
                     data = (
                       <Flex align='center'>
                         <Progress
@@ -150,26 +158,27 @@ export default function ColumnsTable(props) {
                           value={cell.value}
                         />
                       </Flex>
-                    );
+                    )
                   }
                   return (
                     <Td
                       {...cell.getCellProps()}
                       key={index}
-                      fontSize={{ sm: "14px" }}
+                      fontSize={{ sm: '14px' }}
                       maxH='30px !important'
                       py='8px'
-                      minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                      borderColor='transparent'>
+                      minW={{ sm: '150px', md: '200px', lg: 'auto' }}
+                      borderColor='transparent'
+                    >
                       {data}
                     </Td>
-                  );
+                  )
                 })}
               </Tr>
-            );
+            )
           })}
         </Tbody>
       </Table>
     </CardwithModal>
-  );
+  )
 }

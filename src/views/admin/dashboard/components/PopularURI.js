@@ -12,6 +12,7 @@ import BarChart from 'components/charts/BarChart'
 // Custom components
 import { CalendarButton } from 'views/admin/dashboard/components/CalendarButton'
 import CardwithModal from './CardwithModal'
+import ModeSwitch from './ModeSwitch'
 
 export default function DailyTraffic (props) {
   const { tableConfig, tableData, chartOptions, chartData, ...rest } = props
@@ -49,7 +50,10 @@ export default function DailyTraffic (props) {
             </Text>
           </Flex>
         </Flex>
-        <CalendarButton />
+        <Flex direction='column'>
+              <ModeSwitch isTraffic='false'></ModeSwitch>
+              <CalendarButton />
+            </Flex>
       </Flex>
 
       <Box h='240px' mt='auto'>

@@ -1,21 +1,16 @@
 // Chakra imports
-import {
-  Box,
-  Flex,
-  Icon,
-  Text,
-  useColorModeValue
-} from '@chakra-ui/react'
+import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react'
 // Custom components
 import Card from 'components/card/Card.js'
 import LineChart from 'components/charts/LineChart'
-import {React } from 'react'
+import { React } from 'react'
 import { IoCheckmarkCircle } from 'react-icons/io5'
 import {
   lineChartDataTotalSpent,
   lineChartOptionsTotalSpent
 } from 'variables/charts'
-import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
+import { CalendarButton } from 'views/admin/dashboard/components/CalendarButton'
+import ModeSwitch from './ModeSwitch'
 
 export default function TotalSpent (props) {
   const { ...rest } = props
@@ -34,8 +29,10 @@ export default function TotalSpent (props) {
     >
       <Flex justify='space-between' ps='0px' pe='20px' pt='5px'>
         <Flex align='right' w='100%'>
-          <CalendarButton />
-
+          <Flex direction='column'>
+            <ModeSwitch isTraffic='false'></ModeSwitch>
+            <CalendarButton />
+          </Flex>
         </Flex>
       </Flex>
       <Flex w='100%' flexDirection={{ base: 'column', lg: 'row' }}>
@@ -47,7 +44,10 @@ export default function TotalSpent (props) {
             fontWeight='700'
             lineHeight='100%'
           >
-            访问量趋势<br /><br />客户端占比
+            访问量趋势
+            <br />
+            <br />
+            客户端占比
           </Text>
           <Flex align='center' mb='20px'>
             <Text
@@ -68,16 +68,14 @@ export default function TotalSpent (props) {
             </Text>
           </Flex>
         </Flex>
-        
+
         <Box minH='260px' minW='75%' mt='auto'>
           <LineChart
             chartData={lineChartDataTotalSpent}
             chartOptions={lineChartOptionsTotalSpent}
           />
         </Box>
-        
       </Flex>
-
     </Card>
   )
 }

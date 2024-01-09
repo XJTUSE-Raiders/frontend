@@ -11,6 +11,7 @@ import PieChart from 'components/charts/PieChart'
 import { React } from 'react'
 import { CalendarButton } from 'views/admin/dashboard/components/CalendarButton'
 import CardwithModal from './CardwithModal'
+import ModeSwitch from './ModeSwitch'
 
 export default function Conversion (props) {
   const { chartConfig, chartData, tableConfig, tableData, ...rest } = props
@@ -43,7 +44,10 @@ export default function Conversion (props) {
         <Text color={textColor} fontSize='md' fontWeight='600' mt='4px'>
           客户浏览器分布
         </Text>
-        <CalendarButton />
+        <Flex direction='column'>
+              <ModeSwitch isTraffic='false'></ModeSwitch>
+              <CalendarButton />
+            </Flex>
       </Flex>
 
       <PieChart
