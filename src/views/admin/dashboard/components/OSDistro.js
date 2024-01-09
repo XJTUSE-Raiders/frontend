@@ -13,7 +13,7 @@ import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
 import CardwithModal from './CardwithModal'
 import ModeSwitch from './ModeSwitch'
 
-export default function Conversion (props) {
+export default function OSDistro(props) {
   const { chartConfig, chartData, tableConfig, tableData, ...rest } = props
 
   // Chakra Color Mode

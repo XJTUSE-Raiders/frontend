@@ -7,16 +7,16 @@ function CardwithModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Card {...rest}  onClick={onOpen}>
+    <Card {...rest} onClick={onOpen}>
       {children}
       <CommonModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-      <DetailTable 
+      <DetailTable
           columnsData={tableConfig}
           tableData={tableData}
           tableName={tableName}
         />
     </CommonModal>
-    </Card>    
+    </Card>
   );
 }
 

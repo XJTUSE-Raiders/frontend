@@ -8,11 +8,16 @@ export function useAuth() {
 }
 
 export const AuthProvider = ({ children }) => {
-    const [data, setData] = useState(null);
+    const [roleList, setRoleList] = useState([]);
+    const [activeRole, setActiveRole] = useState(null);
 
     const isAuthenticated = useMemo(() => {
-        return data !== null;
-    }, [data]);
+        return roleList.length > 0;
+    }, [roleList]);
+
+    const isReady = useMemo(() => {
+        return activeRole !== null;
+    }, [activeRole]);
 
     const login = (user, pwd) => {
         if (isAuthenticated) {
@@ -20,16 +25,47 @@ export const AuthProvider = ({ children }) => {
         }
 
         return api
-            .post('auth/login', {
+            .post('user/login', {
                 json: {
                     username: user,
                     password: pwd,
                 },
             })
             .json()
-            .then((data) => {
-                setData(data);
-                return Promise.resolve(data);
+            .then(({ token, roles }) => {
+                localStorage.setItem('token', token);
+                setRoleList(roles);
+                if (roles.length === 1) {
+                    setActiveRole(roles[0]);
+                }
+                return Promise.resolve(roles);
+            });
+    };
+
+    const selectRole = (role) => {
+        if (!isAuthenticated) {
+            throw new Error('Not authenticated');
+        }
+
+        if (isReady) {
+            throw new Error('Already selected');
+        }
+
+        if (roleList.indexOf(role) === -1) {
+            throw new Error('Invalid role');
+        }
+
+        return api
+            .post('user/select-role', {
+                json: {
+                    role,
+                },
+            })
+            .json()
+            .then(({ token }) => {
+                localStorage.setItem('token', token);
+                setActiveRole(role);
+                return Promise.resolve();
             });
     };
 
@@ -38,17 +74,15 @@ export const AuthProvider = ({ children }) => {
             throw new Error('Not authenticated');
         }
 
-        return api
-            .post('auth/logout')
-            .json()
-            .then(() => {
-                setData(null);
-                return Promise.resolve();
-            });
+        setActiveRole(null);
+        setRoleList([]);
+        localStorage.removeItem('token');
+
+        return Promise.resolve();
     };
 
     return (
-        <AuthContext.Provider value={{ data, isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{ data: roleList, isAuthenticated, isReady, login, selectRole, logout }}>
             {children}
         </AuthContext.Provider>
     );

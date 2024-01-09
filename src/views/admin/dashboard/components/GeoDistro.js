@@ -12,7 +12,7 @@ import {
   useColorModeValue
 } from '@chakra-ui/react'
 import CardwithModal from './CardwithModal'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import TheadwithNoBubble from 'views/admin/dashboard/components/TheadwithNoBubble'
 import {
   useGlobalFilter,
@@ -28,6 +28,7 @@ function TopCreatorTable (props) {
 
   const columns = useMemo(() => chartConfig, [chartConfig])
   const data = useMemo(() => chartData, [chartData])
+  const [isTraffic, setIsTraffic] = useState(false)
 
   const tableInstance = useTable(
     {
@@ -77,7 +78,7 @@ function TopCreatorTable (props) {
               客户地域分布排行
             </Text>
             <Flex direction='column'>
-              <ModeSwitch isTraffic='false'></ModeSwitch>
+              <ModeSwitch isTraffic={isTraffic} onClick={(x) => setIsTraffic(!x)}></ModeSwitch>
               <CalendarButton />
             </Flex>
           </Flex>
