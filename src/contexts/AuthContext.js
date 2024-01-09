@@ -1,4 +1,5 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { Box, Modal, ModalOverlay, Skeleton, Spinner } from '@chakra-ui/react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { api } from 'variables/api';
 
 export const AuthContext = createContext();
@@ -8,8 +9,31 @@ export function useAuth() {
 }
 
 export const AuthProvider = ({ children }) => {
+    const [fetching, setFetching] = useState(false);
     const [roleList, setRoleList] = useState([]);
     const [activeRole, setActiveRole] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setFetching(true);
+            api
+                .get('user/info')
+                .json()
+                .then(({ roles, active_role }) => {
+                    setRoleList(roles);
+                    if (active_role) {
+                        setActiveRole(active_role);
+                    }
+                })
+                .catch(() => {
+                    localStorage.removeItem('token');
+                })
+                .finally(() => {
+                    setFetching(false);
+                });
+        }
+    }, []);
 
     const isAuthenticated = useMemo(() => {
         return roleList.length > 0;
@@ -29,6 +53,9 @@ export const AuthProvider = ({ children }) => {
                 json: {
                     username: user,
                     password: pwd,
+                },
+                headers: {
+                    'content-type': 'application/json',
                 },
             })
             .json()
@@ -82,8 +109,10 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ data: roleList, isAuthenticated, isReady, login, selectRole, logout }}>
-            {children}
+        <AuthContext.Provider value={{ roleList, activeRole, isAuthenticated, isReady, login, selectRole, logout }}>
+            {fetching ? (
+                <Skeleton />
+            ) : children}
         </AuthContext.Provider>
     );
 };

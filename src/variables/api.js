@@ -17,4 +17,9 @@ export const api = ky.create({
             },
         ],
     },
+    retry: {
+        limit: 3,
+        methods: ['get', 'post'],
+        statusCodes: [500],
+    },
 })
