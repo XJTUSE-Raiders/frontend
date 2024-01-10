@@ -13,13 +13,13 @@ import {
   InputRightElement,
   Modal,
   ModalBody,
-  ModalCloseButton,
+  // ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
   Select,
-  Spinner,
+  // Spinner,
   Text,
   useColorModeValue,
   useDisclosure,
@@ -221,6 +221,11 @@ function SignIn() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 isDisabled={loading}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleLogin();
+                  }
+                }}
               />
               <InputRightElement display='flex' alignItems='center' mt='4px'>
                 <Icon

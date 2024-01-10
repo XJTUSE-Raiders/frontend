@@ -2,23 +2,23 @@ import React from "react";
 
 import { Icon } from "@chakra-ui/react";
 import {
-  MdBarChart,
+  // MdBarChart,
   MdPerson,
-  MdHome,
+  // MdHome,
   MdLock,
-  MdOutlineShoppingCart,
+  // MdOutlineShoppingCart,
   MdAssistantNavigation,
   MdSettingsSuggest
 } from "react-icons/md";
 
 // Admin Imports
-import MainDashboard from "views/admin/default";
+// import MainDashboard from "views/admin/default";
 import Dashboard from "views/admin/dashboard";
 import UserControl from "views/admin/usercontrol";
 import SystemMonitor from 'views/admin/systemMonitor'
-import NFTMarketplace from "views/admin/marketplace";
-import Profile from "views/admin/profile";
-import DataTables from "views/admin/dataTables";
+// import NFTMarketplace from "views/admin/marketplace";
+// import Profile from "views/admin/profile";
+// import DataTables from "views/admin/dataTables";
 // import RTL from "views/admin/rtl";
 
 // Auth Imports

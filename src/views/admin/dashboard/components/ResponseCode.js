@@ -19,7 +19,7 @@ import {
 } from 'react-table'
 
 // Custom components
-import { CalendarButton } from 'views/admin/dashboard/components/CalendarButton'
+import { CalendarMenu } from 'views/admin/dashboard/components/CalendarMenu'
 
 // Assets
 import { MdCheckCircle, MdCancel, MdOutlineError } from 'react-icons/md'
@@ -76,7 +76,7 @@ export default function ColumnsTable (props) {
         </Text>
         <Flex direction='column'>
           <ModeSwitch isTraffic='false'></ModeSwitch>
-          <CalendarButton />
+          <CalendarMenu />
         </Flex>
       </Flex>
       <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>

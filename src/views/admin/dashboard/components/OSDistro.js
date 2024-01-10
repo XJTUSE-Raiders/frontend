@@ -9,7 +9,7 @@ import {
 import Card from 'components/card/Card.js'
 import PieChart from 'components/charts/PieChart'
 import { React } from 'react'
-import {CalendarButton} from 'views/admin/dashboard/components/CalendarButton'
+import {CalendarMenu} from 'views/admin/dashboard/components/CalendarMenu'
 import CardwithModal from './CardwithModal'
 import ModeSwitch from './ModeSwitch'
 
@@ -37,7 +37,7 @@ export default function OSDistro(props) {
         </Text>
         <Flex direction='column'>
               <ModeSwitch isTraffic='false'></ModeSwitch>
-              <CalendarButton />
+              <CalendarMenu />
             </Flex>
       </Flex>
 

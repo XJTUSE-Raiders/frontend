@@ -20,7 +20,7 @@ import {
   useSortBy,
   useTable
 } from 'react-table'
-import { CalendarButton } from 'views/admin/dashboard/components/CalendarButton'
+import { CalendarMenu } from 'views/admin/dashboard/components/CalendarMenu'
 import ModeSwitch from './ModeSwitch'
 
 function TopCreatorTable (props) {
@@ -79,7 +79,7 @@ function TopCreatorTable (props) {
             </Text>
             <Flex direction='column'>
               <ModeSwitch isTraffic={isTraffic} onClick={(x) => setIsTraffic(!x)}></ModeSwitch>
-              <CalendarButton />
+              <CalendarMenu />
             </Flex>
           </Flex>
 

@@ -7,7 +7,7 @@ import {
   barChartDataConsumption,
   barChartOptionsConsumption
 } from 'variables/charts'
-import { CalendarButton } from 'views/admin/dashboard/components/CalendarButton'
+import { CalendarMenu } from 'views/admin/dashboard/components/CalendarMenu'
 import CardwithModal from './CardwithModal'
 import ModeSwitch from './ModeSwitch'
 
@@ -38,7 +38,7 @@ export default function WeeklyRevenue (props) {
         </Text>
         <Flex direction='column'>
           <ModeSwitch isTraffic='false'></ModeSwitch>
-          <CalendarButton />
+          <CalendarMenu />
         </Flex>
       </Flex>
 

@@ -1,4 +1,3 @@
-import { Box, Modal, ModalOverlay, Skeleton, Spinner } from '@chakra-ui/react';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { api } from 'variables/api';
 
@@ -9,31 +8,10 @@ export function useAuth() {
 }
 
 export const AuthProvider = ({ children }) => {
-    const [fetching, setFetching] = useState(false);
+    // const [fetching, setFetching] = useState(false);
+    const [userData, setUserData] = useState({});
     const [roleList, setRoleList] = useState([]);
     const [activeRole, setActiveRole] = useState(null);
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setFetching(true);
-            api
-                .get('user/info')
-                .json()
-                .then(({ roles, active_role }) => {
-                    setRoleList(roles);
-                    if (active_role) {
-                        setActiveRole(active_role);
-                    }
-                })
-                .catch(() => {
-                    localStorage.removeItem('token');
-                })
-                .finally(() => {
-                    setFetching(false);
-                });
-        }
-    }, []);
 
     const isAuthenticated = useMemo(() => {
         return roleList.length > 0;
@@ -42,6 +20,29 @@ export const AuthProvider = ({ children }) => {
     const isReady = useMemo(() => {
         return activeRole !== null;
     }, [activeRole]);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            // setFetching(true);
+            api
+                .get('user/info')
+                .json()
+                .then(({ username, email, phone, roles, active_role }) => {
+                    setUserData({ username, email, phone });
+                    if (active_role) {
+                        setActiveRole(active_role);
+                    }
+                    setRoleList(roles); // order is very important here
+                })
+                .catch(() => {
+                    localStorage.removeItem('token');
+                });
+                // .finally(() => {
+                //     setFetching(false);
+                // });
+        }
+    }, []);
 
     const login = (user, pwd) => {
         if (isAuthenticated) {
@@ -61,6 +62,7 @@ export const AuthProvider = ({ children }) => {
             .json()
             .then(({ token, roles }) => {
                 localStorage.setItem('token', token);
+                setUserData({ username: user });
                 setRoleList(roles);
                 if (roles.length === 1) {
                     setActiveRole(roles[0]);
@@ -101,6 +103,7 @@ export const AuthProvider = ({ children }) => {
             throw new Error('Not authenticated');
         }
 
+        setUserData({});
         setActiveRole(null);
         setRoleList([]);
         localStorage.removeItem('token');
@@ -109,10 +112,10 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ roleList, activeRole, isAuthenticated, isReady, login, selectRole, logout }}>
-            {fetching ? (
-                <Skeleton />
-            ) : children}
+        <AuthContext.Provider value={{ userData,
+            roleList, activeRole, isAuthenticated,
+            isReady, login, selectRole, logout }}>
+            {children}
         </AuthContext.Provider>
     );
 };

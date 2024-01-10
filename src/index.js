@@ -8,23 +8,29 @@ import { ChakraProvider } from '@chakra-ui/react';
 import theme from 'theme/theme';
 // import { ThemeEditorProvider } from '@hypertheme-editor/chakra-ui';
 import { AuthProvider } from 'contexts/AuthContext';
+import AuthRoute from 'components/AuthRoute';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
     <AuthProvider>
-        <ChakraProvider theme={theme}>
-            <React.StrictMode>
-                {/* <ThemeEditorProvider> */}
-                    <HashRouter>
-                        <Switch>
-                            <Route path={`/auth`} component={AuthLayout} />
-                            <Route path={`/admin`} component={AdminLayout} />
-                            <Route path={`/control`} component={AdminLayout} />
-                            <Redirect from='/' to='/admin' />
-                        </Switch>
-                    </HashRouter>
-                {/* </ThemeEditorProvider> */}
-            </React.StrictMode>
-        </ChakraProvider>
+        <QueryClientProvider client={queryClient}>
+            <ChakraProvider theme={theme}>
+                <React.StrictMode>
+                    {/* <ThemeEditorProvider> */}
+                        <HashRouter>
+                            <Switch>
+                                <Route path={`/auth`}><AuthLayout /></Route>
+                                <AuthRoute path={`/admin`}><AdminLayout /></AuthRoute>
+                                <AuthRoute path={`/control`}><AdminLayout /></AuthRoute>
+                                <Redirect from='/' to='/admin' />
+                            </Switch>
+                        </HashRouter>
+                    {/* </ThemeEditorProvider> */}
+                </React.StrictMode>
+            </ChakraProvider>
+        </QueryClientProvider>
     </AuthProvider>,
     document.getElementById('root')
 );

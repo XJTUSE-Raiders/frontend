@@ -1,23 +1,88 @@
 // Chakra imports
-import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, Skeleton, Spacer, Text, useBoolean, useColorModeValue } from '@chakra-ui/react'
 // Custom components
 import Card from 'components/card/Card.js'
-import LineChart from 'components/charts/LineChart'
-import { React } from 'react'
-import { IoCheckmarkCircle } from 'react-icons/io5'
-import {
-  lineChartDataTotalSpent,
-  lineChartOptionsTotalSpent
-} from 'variables/charts'
-import { CalendarButton } from 'views/admin/dashboard/components/CalendarButton'
+// import LineChart from 'components/charts/LineChart'
+import { React, useMemo, useState } from 'react'
+// import { IoCheckmarkCircle } from 'react-icons/io5'
+import { CalendarMenu } from 'views/admin/dashboard/components/CalendarMenu'
 import ModeSwitch from './ModeSwitch'
+import { useQuery } from '@tanstack/react-query'
+import { api } from 'variables/api'
+import { timeStepToSeconds, timeStepShorterFn, timeStepLimiter } from './CalendarMenu'
+import { lineChartOptionsTotalVisit } from 'variables/charts'
+import ReactApexChart from "react-apexcharts";
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-export default function TotalSpent (props) {
+function fetchTotalVisit(isTraffic, timeStep) {
+  const type = isTraffic ? 'traffic' : 'request';
+  return api.get('data/visits', {
+    searchParams: {
+      type,
+      step: timeStep
+    }
+  }).json().then(({ data }) => data)
+}
+
+export default function TotalVisit(props) {
   const { ...rest } = props
 
   // Chakra Color Mode
-
   const textColor = useColorModeValue('secondaryGray.900', 'white')
+
+  // States
+  const [isTraffic, isTrafficControl] = useBoolean(false);
+  const [timeStep, setTimeStep] = useState('second');
+  const { data, remove, isLoading } = useQuery({
+    queryKey: ['totalVisit', isTraffic, timeStep],
+    queryFn: () => fetchTotalVisit(isTraffic, timeStep),
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchInterval: (_data, { queryKey }) => timeStepToSeconds(queryKey[2]) * 1000,
+  })
+
+  const chartOptions = useMemo(() => {
+    if (isLoading) return {};
+    if (!data) return {};
+
+    const { time } = data;
+
+    const fn = timeStepShorterFn(timeStep);
+    const limit = timeStepLimiter(timeStep)
+    const shortTime = limit(time).map((t) => fn(t.split(/[-: ]/)));
+
+    // lineChartOptionsTotalVisit.xaxis.categories = time;
+    return {
+      ...lineChartOptionsTotalVisit,
+      xaxis: {
+        categories: shortTime,
+      },
+    }
+  }, [data, isLoading, timeStep]);
+
+  const chartData = useMemo(() => {
+    if (isLoading) return {}
+    if (!data) return {};
+
+    const { acc, via_app } = data;
+    const limit = timeStepLimiter(timeStep)
+    return [
+      {
+        name: '总访问量',
+        data: limit(acc),
+      },
+      {
+        name: 'APP 访问量',
+        data: limit(via_app),
+      },
+    ];
+  }, [data, isLoading, timeStep]);
+
+  const handleTimeStepChange = (val) => {
+    remove();
+    setTimeStep(val);
+  }
+
   return (
     <Card
       justifyContent='center'
@@ -28,15 +93,25 @@ export default function TotalSpent (props) {
       {...rest}
     >
       <Flex justify='space-between' ps='0px' pe='20px' pt='5px'>
-        <Flex align='right' w='100%'>
+        <Flex w='100%' align="center">
+          <Text
+              color={textColor}
+              fontSize='23px'
+              textAlign='start'
+              fontWeight='700'
+              lineHeight='100%'
+            >
+            访问量趋势
+          </Text>
+          <Spacer />
           <Flex direction='column'>
-            <ModeSwitch isTraffic='false'></ModeSwitch>
-            <CalendarButton />
+            <ModeSwitch isTraffic={isTraffic} onClick={isTrafficControl.toggle} />
+            <CalendarMenu value={timeStep} onChange={handleTimeStepChange} />
           </Flex>
         </Flex>
       </Flex>
-      <Flex w='100%' flexDirection={{ base: 'column', lg: 'row' }}>
-        <Flex flexDirection='column' me='20px' mt='28px'>
+      <Flex w='100%' flexDirection={{ base: 'column', lg: 'row' }} mt="10px">
+        {/* <Flex flexDirection='column' me='20px' mt='28px'>
           <Text
             color={textColor}
             fontSize='23px'
@@ -45,9 +120,6 @@ export default function TotalSpent (props) {
             lineHeight='100%'
           >
             访问量趋势
-            <br />
-            <br />
-            客户端占比
           </Text>
           <Flex align='center' mb='20px'>
             <Text
@@ -67,15 +139,21 @@ export default function TotalSpent (props) {
               On track
             </Text>
           </Flex>
-        </Flex>
+        </Flex> */}
 
-        <Box minH='260px' minW='75%' mt='auto'>
-          <LineChart
-            chartData={lineChartDataTotalSpent}
-            chartOptions={lineChartOptionsTotalSpent}
-          />
+        <Box minH='260px' w="100%" mt='auto'>
+          {isLoading ? <Skeleton h="260px" /> : (
+            <ReactApexChart
+              options={chartOptions}
+              series={chartData}
+              type='line'
+              width='100%'
+              height='100%'
+            />
+          )}
         </Box>
       </Flex>
+      {/* <ReactQueryDevtools initialIsOpen /> */}
     </Card>
   )
 }

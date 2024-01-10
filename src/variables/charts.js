@@ -253,9 +253,9 @@ export const pieChartOptions = {
 
 export const pieChartData = [50, 25, 15, 5, 5];
 
-// Total Spent Default
+// Total Visit Default
 
-export const lineChartDataTotalSpent = [
+export const lineChartDataTotalVisit = [
   {
     name: "Revenue",
     data: [50, 64, 48, 66, 49, 68],
@@ -266,8 +266,16 @@ export const lineChartDataTotalSpent = [
   },
 ];
 
-export const lineChartOptionsTotalSpent = {
+export const lineChartOptionsTotalVisit = {
   chart: {
+    animations: {
+      enabled: true,
+      easing: 'easein',
+      dynamicAnimation: {
+        enabled: true,
+        // speed: 350,
+      },
+    },
     toolbar: {
       show: false,
     },
@@ -300,7 +308,7 @@ export const lineChartOptionsTotalSpent = {
     theme: "dark",
   },
   dataLabels: {
-    enabled: true,
+    enabled: false,
   },
   stroke: {
     curve: "smooth",
@@ -308,7 +316,7 @@ export const lineChartOptionsTotalSpent = {
   },
   xaxis: {
     type: "numeric",
-    categories: ["SEP", "OCT", "NOV", "DEC", "JAN", "FEB"],
+    categories: ["SEP", "OCT", "NOV", "DEC", "JAN", "FEB"], // X-label
     labels: {
       style: {
         colors: "#A3AED0",
@@ -324,7 +332,7 @@ export const lineChartOptionsTotalSpent = {
     },
   },
   yaxis: {
-    show: false,
+    show: true,
   },
   legend: {
     show: true,
