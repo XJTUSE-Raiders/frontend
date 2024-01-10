@@ -120,8 +120,16 @@ export const barChartDataConsumption = [
   },
 ];
 
-export const barChartOptionsConsumption = {
+export const heatmapChartOptions = {
   chart: {
+    animations: {
+      enabled: true,
+      easing: 'easein',
+      dynamicAnimation: {
+        enabled: true,
+        // speed: 350,
+      },
+    },
     stacked: true,
     toolbar: {
       show: false,
@@ -141,7 +149,7 @@ export const barChartOptionsConsumption = {
     theme: "dark",
   },
   xaxis: {
-    categories: ["17", "18", "19", "20", "21", "22", "23", "24", "25"],
+    // categories: ["17", "18", "19", "20", "21", "22", "23", "24", "25"],
     show: false,
     labels: {
       show: true,
@@ -159,10 +167,10 @@ export const barChartOptionsConsumption = {
     },
   },
   yaxis: {
-    show: false,
+    show: true,
     color: "black",
     labels: {
-      show: false,
+      show: true,
       style: {
         colors: "#A3AED0",
         fontSize: "14px",
@@ -191,20 +199,25 @@ export const barChartOptionsConsumption = {
   },
   fill: {
     type: "solid",
-    colors: ["#5E37FF", "#6AD2FF", "#E1E9F8"],
+    colors: ["#f44336", "#e91e63", "#9c27b0", "#3f51b5", "#2196f3", "#00bcd4", "#009688", "#ff9800"],
+    // colors: ["#66ccff"],
   },
   legend: {
     show: true,
   },
-  colors: ["#5E37FF", "#6AD2FF", "#E1E9F8"],
+  colors: ["#f44336", "#e91e63", "#9c27b0", "#3f51b5", "#2196f3", "#00bcd4", "#009688", "#ff9800"],
+  // colors: ["#66ccff"],
   dataLabels: {
     enabled: false,
   },
   plotOptions: {
-    bar: {
-      borderRadius: 10,
-      columnWidth: "20px",
-    },
+    // bar: {
+    //   borderRadius: 10,
+    //   columnWidth: "20px",
+    // },
+    heatmap: {
+      distributed: true,
+    }
   },
 };
 

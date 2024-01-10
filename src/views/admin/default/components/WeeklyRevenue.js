@@ -13,7 +13,7 @@ import BarChart from "components/charts/BarChart";
 import React from "react";
 import {
   barChartDataConsumption,
-  barChartOptionsConsumption,
+  // barChartOptions,
 } from "variables/charts";
 import { MdBarChart } from "react-icons/md";
 
@@ -60,10 +60,10 @@ export default function WeeklyRevenue(props) {
       </Flex>
 
       <Box h='240px' mt='auto'>
-        <BarChart
+        {/* <BarChart
           chartData={barChartDataConsumption}
-          chartOptions={barChartOptionsConsumption}
-        />
+          chartOptions={barChartOptions}
+        /> */}
       </Box>
     </Card>
   );

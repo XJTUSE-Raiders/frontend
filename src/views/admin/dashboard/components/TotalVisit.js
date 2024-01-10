@@ -25,25 +25,26 @@ function fetchTotalVisit(isTraffic, timeStep) {
 }
 
 export default function TotalVisit(props) {
-  const { ...rest } = props
+  const { ...rest } = props;
 
   // Chakra Color Mode
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
+  const textColor = useColorModeValue('secondaryGray.900', 'white');
 
   // States
   const [isTraffic, isTrafficControl] = useBoolean(false);
-  const [timeStep, setTimeStep] = useState('second');
+  const [timeStep, setTimeStep] = useState('minute');
   const { data, remove, isLoading } = useQuery({
     queryKey: ['totalVisit', isTraffic, timeStep],
     queryFn: () => fetchTotalVisit(isTraffic, timeStep),
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchInterval: (_data, { queryKey }) => timeStepToSeconds(queryKey[2]) * 1000,
-  })
+  });
 
+  // Memorized computed
   const chartOptions = useMemo(() => {
-    if (isLoading) return {};
-    if (!data) return {};
+    if (isLoading) return null;
+    if (!data) return null;
 
     const { time } = data;
 
@@ -61,11 +62,12 @@ export default function TotalVisit(props) {
   }, [data, isLoading, timeStep]);
 
   const chartData = useMemo(() => {
-    if (isLoading) return {}
-    if (!data) return {};
+    if (isLoading) return null;
+    if (!data) return null;
 
     const { acc, via_app } = data;
     const limit = timeStepLimiter(timeStep)
+
     return [
       {
         name: '总访问量',
@@ -82,6 +84,9 @@ export default function TotalVisit(props) {
     remove();
     setTimeStep(val);
   }
+
+  // Immediate computed
+  const pending = isLoading || chartOptions === null || chartData === null;
 
   return (
     <Card
@@ -142,7 +147,7 @@ export default function TotalVisit(props) {
         </Flex> */}
 
         <Box minH='260px' w="100%" mt='auto'>
-          {isLoading ? <Skeleton h="260px" /> : (
+          {pending ? <Skeleton h="260px" /> : (
             <ReactApexChart
               options={chartOptions}
               series={chartData}

@@ -28,9 +28,9 @@ import {
 } from "variables/charts";
 import {
   barChartDataConsumption,
-  barChartOptionsConsumption,
+  heatmapChartOptions,
 } from "variables/charts";
-import { 
+import {
   FcReadingEbook,
   FcClock,
   FcBullish
@@ -72,8 +72,8 @@ export default function DashReports() {
           name='每分钟访问量'
           value='64239'
         />
-        <MiniStatistics 
-          growth='+15%' 
+        <MiniStatistics
+          growth='+15%'
           startContent={
             <IconBox
             w='56px'
@@ -85,32 +85,30 @@ export default function DashReports() {
               />
           }
 
-          name='本月总访问量' 
+          name='本月总访问量'
           value='57434' />
       </SimpleGrid>
       <SimpleGrid columns={{base:1,md:1,xl:2}}  gap='20px' mb='20px'>
           <TotalVisit />
-          <ISPDistro 
-            chartData={barChartDataConsumption}
-            chartConfig={barChartOptionsConsumption}
+          <ISPDistro
             tableConfig={URITableConfig}
             tableData={URITableData}
           />
       </SimpleGrid>
       <SimpleGrid columns={{base:1, md:2, xl:3}} gap='20px' mb='20px'>
-          <OSDistro 
+          <OSDistro
             chartData={pieChartData}
             chartConfig={pieChartOptions}
             tableConfig={URITableConfig}
             tableData={URITableData}
           />
-          <GeoDistro 
+          <GeoDistro
             chartData={GeoData}
             chartConfig={GeoConfig}
             tableConfig={URITableConfig}
             tableData={URITableData}
           />
-          <BroswerDistro 
+          <BroswerDistro
             chartData={pieChartData}
             chartConfig={pieChartOptions}
             tableConfig={URITableConfig}
@@ -118,13 +116,13 @@ export default function DashReports() {
           />
       </SimpleGrid>
       <SimpleGrid columns={{base:1, md:2, xl:2}} gap='20px' mb='20px'>
-          <PopularURI 
+          <PopularURI
             tableConfig={URITableConfig}
             tableData={URITableData}
             chartOptions={barChartOptionsDailyTraffic}
             chartData={barChartDataDailyTraffic}
           />
-          <ResponseCode 
+          <ResponseCode
             chartConfig={CodeChartConfig}
             chartData={CodeChartData}
             tableConfig={URITableConfig}

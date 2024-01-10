@@ -31,7 +31,7 @@ const MENU_ITEMS = [
   },
   {
     label: '最近一年',
-    value: 'year'
+    value: 'month'
   }
 ];
 
@@ -41,18 +41,18 @@ export function timeStepToSeconds(timeStep) {
     minute: 60,
     hour: 60 * 60,
     day: 24 * 60 * 60,
-    year: 365 * 24 * 60 * 60,
+    month: 30 * 24 * 60 * 60,
   }[timeStep];
 }
 
 export function timeStepShorterFn(timeStep) {
   // '0000-11-22 33:44:55'
   return {
-    second: (dt) => `${dt[4]}:${dt[5]}`,
+    second: (dt) => `${dt[3]}:${dt[4]}:${dt[5]}`,
     minute: (dt) => `${dt[3]}:${dt[4]}`,
     hour: (dt) => `${dt[2]} ${dt[3]}`,
     day: (dt) => `${dt[1]}-${dt[2]}`,
-    year: (dt) => `${dt[0]}-${dt[1]}`,
+    month: (dt) => `${dt[0]}-${dt[1]}`,
   }[timeStep];
 }
 
@@ -62,7 +62,7 @@ export function timeStepLimiter(timeStep) {
     minute: (arr) => arr.slice(-16, -1),
     hour: (arr) => arr.slice(-15),
     day: (arr) => arr.slice(-15),
-    year: (arr) => arr,
+    month: (arr) => arr,
   }[timeStep];
 }
 
