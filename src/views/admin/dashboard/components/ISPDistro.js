@@ -7,8 +7,9 @@ import {
   // barChartDataConsumption,
   heatmapChartOptions
 } from 'variables/charts'
-import { CalendarMenu, timeStepToSeconds, timeStepShorterFn, timeStepLimiter } from './CalendarMenu'
-import CardwithModal from './CardwithModal'
+import { CalendarMenu, timeStepToSeconds, timeStepShorterFn, timeStepLimiter } from './CalendarMenuRT'
+// import CardwithModal from './CardwithModal'
+import Card from 'components/card/Card.js'
 import ModeSwitch from './ModeSwitch'
 import { api } from 'variables/api'
 import { useQuery } from '@tanstack/react-query'
@@ -59,7 +60,7 @@ export default function ISPDistro(props) {
       xaxis: {
         categories: shortTime,
       },
-    }
+    };
   }, [data, isLoading, timeStep]);
   // const chartOptions = heatmapChartOptions;
 
@@ -99,10 +100,10 @@ export default function ISPDistro(props) {
   };
 
   return (
-    <CardwithModal
-      tableConfig={tableConfig}
-      tableData={tableData}
-      tableName='运营商分布详表'
+    <Card
+      // tableConfig={tableConfig}
+      // tableData={tableData}
+      // tableName='运营商分布详表'
       align='center'
       direction='column'
       w='100%'
@@ -136,6 +137,6 @@ export default function ISPDistro(props) {
           />
         )}
       </Box>
-    </CardwithModal>
+    </Card>
   )
 }

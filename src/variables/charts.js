@@ -7,7 +7,7 @@ export const barChartDataDailyTraffic = [
   },
 ];
 
-export const barChartOptionsDailyTraffic = {
+export const barChartOptionsPopularURI = {
   chart: {
     toolbar: {
       show: false,
@@ -223,7 +223,7 @@ export const heatmapChartOptions = {
 
 export const pieChartOptions = {
   labels: ["Windows", "macOS", "Linux", "Andoroid", "iOS"],
-  colors: ["#4318FF", "#7585fa", "#689cf7", "#6AD2FF", "#EFF4FB"],
+  colors: ["#4318FF", "#7585fa", "#689cf7", "#6AD2FF", "#bee3f8"],
   chart: {
     width: "50px",
   },
@@ -256,7 +256,7 @@ export const pieChartOptions = {
     },
   },
   fill: {
-    colors: ["#4318FF", "#7585fa", "#689cf7", "#6AD2FF", "#EFF4FB"],
+    colors: ["#4318FF", "#7585fa", "#689cf7", "#6AD2FF", "#bee3f8"],
   },
   tooltip: {
     enabled: true,

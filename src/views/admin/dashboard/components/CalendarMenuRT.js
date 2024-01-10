@@ -14,46 +14,55 @@ import { MdOutlineCalendarToday } from 'react-icons/md'
 
 const MENU_ITEMS = [
   {
-    label: '最近一分钟',
+    label: '实时追踪',
+    value: 'second'
+  },
+  {
+    label: '最近 15 分钟',
     value: 'minute'
   },
   {
-    label: '最近一小时',
+    label: '最近 15 小时',
     value: 'hour'
   },
   {
-    label: '最近一天',
+    label: '最近 15 天',
     value: 'day'
   },
   {
-    label: '最近一月',
-    value: 'month'
-  },
-  {
     label: '最近一年',
-    value: 'year'
+    value: 'month'
   }
 ];
 
 export function timeStepToSeconds(timeStep) {
   return {
+    second: 1,
     minute: 60,
     hour: 60 * 60,
     day: 24 * 60 * 60,
     month: 0,
-    year: 0,
   }[timeStep];
 }
 
 export function timeStepShorterFn(timeStep) {
   // '0000-11-22 33:44:55'
   return {
-    // second: (dt) => `${dt[3]}:${dt[4]}:${dt[5]}`,
+    second: (dt) => `${dt[3]}:${dt[4]}:${dt[5]}`,
     minute: (dt) => `${dt[3]}:${dt[4]}`,
     hour: (dt) => `${dt[2]} ${dt[3]}`,
     day: (dt) => `${dt[1]}-${dt[2]}`,
     month: (dt) => `${dt[0]}-${dt[1]}`,
-    year: (dt) => `${dt[0]}`,
+  }[timeStep];
+}
+
+export function timeStepLimiter(timeStep) {
+  return {
+    second: (arr) => arr.slice(0, 15),
+    minute: (arr) => arr.slice(-16, -1),
+    hour: (arr) => arr.slice(-15),
+    day: (arr) => arr.slice(-15),
+    month: (arr) => arr,
   }[timeStep];
 }
 

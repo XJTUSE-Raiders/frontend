@@ -20,9 +20,9 @@ import { CalendarMenu, timeStepToSeconds } from './CalendarMenu'
 import { pieChartOptions } from 'variables/charts'
 import ReactApexChart from 'react-apexcharts'
 
-function fetchOSDistro(isTraffic, timeStep) {
+function fetchBrowserDistro(isTraffic, timeStep) {
   const type = isTraffic ? 'traffic' : 'request';
-  return api.get('data/os', {
+  return api.get('data/browser', {
     searchParams: {
       type,
       step: timeStep
@@ -40,7 +40,7 @@ function fetchOSDistro(isTraffic, timeStep) {
   })
 }
 
-export default function OSDistro(props) {
+export default function BrowserDistro(props) {
   const { tableConfig, tableData, ...rest } = props
 
   // Chakra Color Mode
@@ -55,8 +55,8 @@ export default function OSDistro(props) {
   const [isTraffic, isTrafficControl] = useBoolean(false);
   const [timeStep, setTimeStep] = useState('month');
   const { data, remove, isLoading } = useQuery({
-    queryKey: ['OSDistro', isTraffic, timeStep],
-    queryFn: () => fetchOSDistro(isTraffic, timeStep),
+    queryKey: ['BrowserDistro', isTraffic, timeStep],
+    queryFn: () => fetchBrowserDistro(isTraffic, timeStep),
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchInterval: (_data, { queryKey }) => timeStepToSeconds(queryKey[2]) * 1000,
@@ -93,7 +93,16 @@ export default function OSDistro(props) {
   const pending = isLoading || chartOptions === null || chartData === null;
 
   return (
-    <Card p='20px' align='center' direction='column' w='100%' {...rest}>
+    <Card
+      // tableConfig={tableConfig}
+      // tableData={tableData}
+      // tableName='浏览器类型分布详表'
+      p='20px'
+      align='center'
+      direction='column'
+      w='100%'
+      {...rest}
+    >
       <Flex
         px={{ base: '0px', '2xl': '10px' }}
         justifyContent='space-between'
@@ -102,7 +111,7 @@ export default function OSDistro(props) {
         mb='8px'
       >
         <Text color={textColor} fontSize='md' fontWeight='600' mt='4px'>
-          客户操作系统分布
+          客户浏览器分布
         </Text>
         <Spacer />
         <Flex direction='column'>

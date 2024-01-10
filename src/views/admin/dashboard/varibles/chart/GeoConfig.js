@@ -1,14 +1,14 @@
-export const GeoConfig = [
+export const geoConfig = [
   {
     Header: "地域名称",
     accessor: "name",
   },
   {
     Header: "访问量",
-    accessor: "artworks",
+    accessor: "acc",
   },
   {
     Header: "占比",
-    accessor: "rating",
+    accessor: "percent",
   },
 ];

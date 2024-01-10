@@ -10,13 +10,11 @@ import React from "react";
 import TotalVisit from "views/admin/dashboard/components/TotalVisit";
 import ISPDistro from "views/admin/dashboard/components/ISPDistro";
 import GeoDistro from "views/admin/dashboard/components/GeoDistro";
-import BroswerDistro from "views/admin/dashboard/components/BroswerDistro";
+import BrowserDistro from "views/admin/dashboard/components/BrowserDistro";
 import OSDistro from "views/admin/dashboard/components/OSDistro";
 import PopularURI from "views/admin/dashboard/components/PopularURI";
 import ResponseCode from "views/admin/dashboard/components/ResponseCode";
 
-import {GeoConfig} from "views/admin/dashboard/varibles/chart/GeoConfig";
-import GeoData from "views/admin/dashboard/varibles/chart/GeoData.json";
 import {CodeChartConfig} from "views/admin/dashboard/varibles/chart/CodeConfig";
 import CodeChartData from "views/admin/dashboard/varibles/chart/CodeData.json";
 import {URITableConfig} from "views/admin/dashboard/varibles/table/URIConfig";
@@ -24,7 +22,7 @@ import URITableData from "views/admin/dashboard/varibles/table/URIData.json";
 import { pieChartData, pieChartOptions } from 'variables/charts'
 import {
   barChartDataDailyTraffic,
-  barChartOptionsDailyTraffic,
+  barChartOptionsPopularURI,
 } from "variables/charts";
 import {
   barChartDataConsumption,
@@ -40,7 +38,7 @@ export default function DashReports() {
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <SimpleGrid
+      {/* <SimpleGrid
         columns={{ base: 1, md: 2, lg: 3}}
         gap='20px'
         mb='20px'>
@@ -87,41 +85,18 @@ export default function DashReports() {
 
           name='本月总访问量'
           value='57434' />
-      </SimpleGrid>
+      </SimpleGrid> */}
       <SimpleGrid columns={{base:1,md:1,xl:2}}  gap='20px' mb='20px'>
           <TotalVisit />
-          <ISPDistro
-            tableConfig={URITableConfig}
-            tableData={URITableData}
-          />
+          <ISPDistro />
       </SimpleGrid>
       <SimpleGrid columns={{base:1, md:2, xl:3}} gap='20px' mb='20px'>
-          <OSDistro
-            chartData={pieChartData}
-            chartConfig={pieChartOptions}
-            tableConfig={URITableConfig}
-            tableData={URITableData}
-          />
-          <GeoDistro
-            chartData={GeoData}
-            chartConfig={GeoConfig}
-            tableConfig={URITableConfig}
-            tableData={URITableData}
-          />
-          <BroswerDistro
-            chartData={pieChartData}
-            chartConfig={pieChartOptions}
-            tableConfig={URITableConfig}
-            tableData={URITableData}
-          />
+          <OSDistro />
+          <GeoDistro />
+          <BrowserDistro />
       </SimpleGrid>
       <SimpleGrid columns={{base:1, md:2, xl:2}} gap='20px' mb='20px'>
-          <PopularURI
-            tableConfig={URITableConfig}
-            tableData={URITableData}
-            chartOptions={barChartOptionsDailyTraffic}
-            chartData={barChartDataDailyTraffic}
-          />
+          <PopularURI />
           <ResponseCode
             chartConfig={CodeChartConfig}
             chartData={CodeChartData}

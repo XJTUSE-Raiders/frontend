@@ -8,7 +8,7 @@ import BarChart from "components/charts/BarChart";
 import Card from "components/card/Card.js";
 import {
   barChartDataDailyTraffic,
-  barChartOptionsDailyTraffic,
+  barChartOptionsPopularURI,
 } from "variables/charts";
 
 // Assets
@@ -59,7 +59,7 @@ export default function DailyTraffic(props) {
       <Box h='240px' mt='auto'>
         <BarChart
           chartData={barChartDataDailyTraffic}
-          chartOptions={barChartOptionsDailyTraffic}
+          chartOptions={barChartOptionsPopularURI}
         />
       </Box>
     </Card>
