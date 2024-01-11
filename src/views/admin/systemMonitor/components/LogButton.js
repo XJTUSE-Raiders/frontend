@@ -26,8 +26,6 @@ function LogButton (props) {
     queryFn: () => api.get('service/log', {
       searchParams: { id: containerId }
     }).json().then(({ data }) => data.join('\n')),
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
   });
 
   return (
