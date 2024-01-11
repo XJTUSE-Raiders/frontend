@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 // Chakra imports
 import {
@@ -9,7 +9,16 @@ import {
   useColorModeValue,
   Badge,
   ButtonGroup,
-  Button
+  Button,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
+  useDisclosure,
+  Code,
+  useToast
 } from '@chakra-ui/react'
 import { FcOk, FcHighPriority } from 'react-icons/fc'
 // Custom components
@@ -19,11 +28,43 @@ import Card from 'components/card/Card.js'
 import { HSeparator } from 'components/separator/Separator'
 import { VSeparator } from 'components/separator/Separator'
 import LogButton from './LogButton'
+import { api } from 'variables/api'
 
 export default function ContainerCard(props) {
   const { containerId, containerName, status, state, ...rest } = props;
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const isOk = state === 'running';
+  const cancelRef = useRef();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  const [blocking, setBlocking] = React.useState(false);
+
+  const handleRestart = () => {
+    if (blocking) return;
+    setBlocking(true);
+    api.post('service/restart', {
+      json: {
+        id: containerId,
+      },
+    }).then(() => {
+      setBlocking(false);
+      toast({
+        description: '服务重启成功',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
+      onClose();
+    }).catch((e) => {
+      setBlocking(false);
+      toast({
+        description: `服务重启失败 (${e.message})`,
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      });
+    });
+  }
 
   return (
     <Card
@@ -73,12 +114,39 @@ export default function ContainerCard(props) {
           </Flex>
           <Flex mt={5} justifyContent='flex-end'>
             <ButtonGroup spacing='3'>
-              <LogButton>Logs</LogButton>
-              <Button variant='brand'>Restart</Button>
+              <LogButton containerId={containerId} containerName={containerName}>Logs</LogButton>
+              <Button variant='brand' onClick={onOpen}>Restart</Button>
             </ButtonGroup>
           </Flex>
         </Flex>
       </Flex>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        closeOnOverlayClick={blocking ? false : true}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              警告
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              本操作将会使服务可用性受到影响，确定要重新启动 <Code>{containerName}</Code> 吗？
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose} isDisabled={blocking}>
+                取消
+              </Button>
+              <Button colorScheme='red' onClick={handleRestart} ml={3} isDisabled={blocking}>
+                确认
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Card>
   )
 }

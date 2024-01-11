@@ -12,6 +12,7 @@ export default function Overview() {
   const { data, isLoading } = useQuery({
     queryKey: ["containers"],
     queryFn: () => api.get("service/list").json().then(({ data }) => data),
+    refetchInterval: 30000,
   });
 
   return (

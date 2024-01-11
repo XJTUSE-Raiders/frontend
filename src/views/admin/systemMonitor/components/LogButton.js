@@ -10,12 +10,25 @@ import {
   Flex,
   IconButton,
   Box,
-  Text
+  Text,
+  Code,
+  ModalFooter,
 } from '@chakra-ui/react'
+import { useQuery } from '@tanstack/react-query';
 import { MdOutlineRefresh } from 'react-icons/md'
+import { api } from 'variables/api';
 function LogButton (props) {
-  const { children, modalName, ...rest } = props
+  const { children, containerId, containerName, ...rest } = props
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const { data, refetch, isFetching } = useQuery({
+    queryKey: ['fetchContainerLog', containerId],
+    queryFn: () => api.get('service/log', {
+      searchParams: { id: containerId }
+    }).json().then(({ data }) => data.join('\n')),
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
 
   return (
     <Button {...rest} onClick={onOpen}>
@@ -29,43 +42,29 @@ function LogButton (props) {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>服务运行日志</ModalHeader>
+          <ModalHeader>
+            <Code fontSize="xl">{containerName}</Code> 的运行日志
+            <IconButton
+              colorScheme='gray'
+              icon={<MdOutlineRefresh size='60%' />}
+              size='sm'
+              ml="5px"
+              onClick={() => refetch()}
+            />
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Flex direction='column'>
-              <Flex>
-                <Button variant='brand'>重启服务</Button>
-                <IconButton
-                  colorScheme='brand'
-                  icon={<MdOutlineRefresh size='60%' />}
-                  mx={1}
-                />
-              </Flex>
-              <Flex my={3}>
-                <Box bgColor='gray.300' borderRadius='lg' p={3} maxH={400} overflowY='auto' overflowWrap='normal'>
-                  <Text as='samp'>
-                  The quick brown fox jumps over the lazy dog" is an English-language pangram—a
-  sentence that contains all of the letters of the English alphabet. Owing to
-  its existence, Chakra was created                  The quick brown fox jumps over the lazy dog" is an English-language pangram—a
-  sentence that contains all of the letters of the English alphabet. Owing to
-  its existence, Chakra was created                  The quick brown fox jumps over the lazy dog" is an English-language pangram—a
-  sentence that contains all of the letters of the English alphabet. Owing to
-  its existence, Chakra was created                  The quick brown fox jumps over the lazy dog" is an English-language pangram—a
-  sentence that contains all of the letters of the English alphabet. Owing to
-  its existence, Chakra was created                  The quick brown fox jumps over the lazy dog" is an English-language pangram—a
-  sentence that contains all of the letters of the English alphabet. Owing to
-  its existence, Chakra was created                  The quick brown fox jumps over the lazy dog" is an English-language pangram—a
-  sentence that contains all of the letters of the English alphabet. Owing to
-  its existence, Chakra was created                  The quick brown fox jumps over the lazy dog" is an English-language pangram—a
-  sentence that contains all of the letters of the English alphabet. Owing to
-  its existence, Chakra was created                  The quick brown fox jumps over the lazy dog" is an English-language pangram—a
-  sentence that contains all of the letters of the English alphabet. Owing to
-  its existence, Chakra was created
+            <Flex direction='column' w="100%">
+              <Flex w="100%">
+                <Box bgColor='gray.300' w="100%" borderRadius='lg' p={3} maxH={400} overflowY='auto' overflowWrap='normal'>
+                  <Text as='samp' w="100%">
+                    {isFetching ? 'Loading...' : data}
                   </Text>
                 </Box>
               </Flex>
             </Flex>
           </ModalBody>
+          <ModalFooter />
         </ModalContent>
       </Modal>
     </Button>

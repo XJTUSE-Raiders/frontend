@@ -128,7 +128,7 @@ export default function UserManage() {
   return (
     <Card mb={{ base: "0px", lg: "20px" }} align='center'>
       <Flex my={1}>
-        <UserAddButton size='md' colorScheme='brand' modalName='增加新用户' mx={1} isDisabled={disabled} onSubmit={handleRefresh}>
+        <UserAddButton size='md' colorScheme='brand' mx={1} isDisabled={disabled} onSubmit={handleRefresh}>
           增加用户
         </UserAddButton>
         <DeleteButton size='md' colorScheme='red' mx={1} isDisabled={disabled || selectedCount === 0} users={selectedUsers} onConfirm={handleDelete}>
