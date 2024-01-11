@@ -21,17 +21,17 @@ import { HSeparator } from 'components/separator/Separator'
 import { VSeparator } from 'components/separator/Separator'
 import LogButton from './LogButton'
 
-export default function ContainerCard (props) {
+export default function ContainerCard(props) {
   const { containerName, version, upTime, status, reportTime, isOk, ...rest } = props
   const textColor = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'secondaryGray.600'
-  function okStatus () {
+  function okStatus() {
     return isOk === 'true' ? FcOk : FcHighPriority
   }
   function badgeStatus() {
     return isOk === 'true' ? 'Operational' : 'Outage'
   }
-  function colorStatus () {
+  function colorStatus() {
     return isOk === 'true' ? 'green' : 'red'
   }
 
@@ -55,27 +55,15 @@ export default function ContainerCard (props) {
               Service
             </Text>
             <Flex w='100%'>
-            <Text fontSize='xl' as='samp' mr={2}>
-              {containerName}
-            </Text>
-            <Badge colorScheme='blue' variant='outline' size='md' verticalAlign='center' alignSelf='center'>{version}</Badge>         
+              <Text fontSize='xl' as='samp' mr={2}>
+                {containerName}
+              </Text>
             </Flex>
-
-
           </Flex>
 
           <Icon as={okStatus()} w='50px' h='auto' color='gray.400' />
         </Flex>
         <HSeparator />
-        <Flex direction='column' mt='5px'>
-          <Text fontSize={{ sm: 'xl', lg: 'lg', xl: 'xl' }} fontWeight='bold'>
-            Report Time:
-          </Text>
-          <Text fontSize={{ sm: 'xl', lg: 'lg', xl: 'xl' }} as='samp'>
-            {reportTime}
-          </Text>
-        </Flex>
-        <Spacer />
         <Flex direction='column'>
           <Flex mt='14px'>
             <Flex direction='column' me='34px'>
