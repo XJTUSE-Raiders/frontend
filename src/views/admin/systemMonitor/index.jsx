@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "variables/api";
 
 export default function Overview() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["containers"],
     queryFn: () => api.get("service/list").json().then(({ data }) => data),
     refetchInterval: 30000,
@@ -24,10 +24,12 @@ export default function Overview() {
           <Skeleton h="240px" />
           <Skeleton h="240px" />
         </>) : data.map((res) => (<ContainerCard
+          key={res.id}
           containerId={res.id}
           containerName={res.name}
           state={res.state}
           status={res.status}
+          onRestart={refetch}
         />))}
       </SimpleGrid>
     </Box>

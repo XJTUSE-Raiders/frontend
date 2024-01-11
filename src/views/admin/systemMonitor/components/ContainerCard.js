@@ -31,7 +31,7 @@ import LogButton from './LogButton'
 import { api } from 'variables/api'
 
 export default function ContainerCard(props) {
-  const { containerId, containerName, status, state, ...rest } = props;
+  const { containerId, containerName, status, state, onRestart, ...rest } = props;
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const isOk = state === 'running';
   const cancelRef = useRef();
@@ -55,6 +55,7 @@ export default function ContainerCard(props) {
         isClosable: true,
       });
       onClose();
+      onRestart?.();
     }).catch((e) => {
       setBlocking(false);
       toast({
