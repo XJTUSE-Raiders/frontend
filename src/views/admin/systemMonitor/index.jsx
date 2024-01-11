@@ -1,21 +1,28 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, SimpleGrid, Skeleton } from "@chakra-ui/react";
 
 // Custom components
 
 // Assets
 import React from "react";
 import ContainerCard from "./components/ContainerCard";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "variables/api";
 
 export default function Overview() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["containers"],
+    queryFn: () => api.get("service/list").json().then(({ data }) => data),
+  });
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid columns={{base:2, md:4, xl:4}} gap='20px' mb='20px'>
-        <ContainerCard
-          isOk='true'
-          containerName='Flume-Source'
-          state='running'
-          status='Up 2 days'
-        />
+        {isLoading ? <Skeleton h="240px" /> : data.map((res) => (<ContainerCard
+          containerId={res.id}
+          containerName={res.name}
+          state={res.state}
+          status={res.status}
+        />))}
       </SimpleGrid>
     </Box>
   );

@@ -3,7 +3,6 @@ import React from 'react'
 // Chakra imports
 import {
   Flex,
-  Box,
   Icon,
   Text,
   Spacer,
@@ -25,11 +24,7 @@ export default function ContainerCard(props) {
   const { containerId, containerName, status, state, ...rest } = props;
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const isOk = state === 'running';
-  function colorStatus() {
-    return isOk === 'true' ? 'green' : 'red'
-  }
 
-  // Chakra Color Mode
   return (
     <Card
       alignSelf='center'
