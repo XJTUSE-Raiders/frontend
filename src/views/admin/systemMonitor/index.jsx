@@ -18,7 +18,12 @@ export default function Overview() {
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid columns={{base:2, md:4, xl:4}} gap='20px' mb='20px'>
-        {isLoading ? <Skeleton h="240px" /> : data.map((res) => (<ContainerCard
+        {isLoading ? (<>
+          <Skeleton h="240px" />
+          <Skeleton h="240px" />
+          <Skeleton h="240px" />
+          <Skeleton h="240px" />
+        </>) : data.map((res) => (<ContainerCard
           containerId={res.id}
           containerName={res.name}
           state={res.state}
