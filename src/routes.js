@@ -8,14 +8,16 @@ import {
   // MdLock,
   // MdOutlineShoppingCart,
   MdAssistantNavigation,
-  MdSettingsSuggest
+  MdSettingsSuggest,
+  MdKey
 } from "react-icons/md";
 
 // Admin Imports
 // import MainDashboard from "views/admin/default";
 import Dashboard from "views/admin/dashboard";
-import UserControl from "views/admin/usercontrol";
+import UserControl from "views/admin/userControl";
 import SystemMonitor from 'views/admin/systemMonitor'
+import RoleManage from "views/admin/roleManage";
 // import NFTMarketplace from "views/admin/marketplace";
 // import Profile from "views/admin/profile";
 // import DataTables from "views/admin/dataTables";
@@ -34,20 +36,28 @@ const routes = [
     access: ['admin', 'maintainer', 'user'],
   },
   {
-    name: "用户管理面板",
-    layout: "/admin",
-    path: "/usercontrol",
-    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
-    component: UserControl,
-    access: ['admin'],
-  },
-  {
-    name: "系统管理面板",
+    name: "系统运维",
     layout: "/admin",
     path: "/system-monitor",
     icon: <Icon as={MdSettingsSuggest} width='20px' height='20px' color='inherit' />,
     component: SystemMonitor,
     access: ['admin', 'maintainer'],
+  },
+  {
+    name: "用户管理",
+    layout: "/admin",
+    path: "/user-control",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: UserControl,
+    access: ['admin'],
+  },
+  {
+    name: "角色权限管理",
+    layout: "/admin",
+    path: "/role-manage",
+    icon: <Icon as={MdKey} width='20px' height='20px' color='inherit' />,
+    component: RoleManage,
+    access: ['admin'],
   },
   // {
   //   name: "原 Dashboard",

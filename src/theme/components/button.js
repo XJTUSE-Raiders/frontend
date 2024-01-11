@@ -29,6 +29,9 @@ export const buttonStyles = {
           },
           _hover: {
             bg: mode("brand.600", "brand.400")(props),
+            _disabled: {
+              bg: mode("brand.500", "brand.400")(props),
+            },
           },
         }),
         darkBrand: (props) => ({
