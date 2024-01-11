@@ -5,38 +5,33 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  Flex,
-  Button
+  Button,
+  ModalFooter
 } from '@chakra-ui/react'
 import React from 'react'
 
-export default function ReturnFocus (props) {
-  const { isOpen, onClose, modalName, children } = props
-
-  const finalRef = React.useRef()
+export default function UserModifyModal(props) {
+  const { isOpen, onClose, onSave, modalTitle, isLoading, children } = props
 
   return (
-    <>
-      <Modal
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-        size='4xl'
-        useInert='false'
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{modalName}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Flex>{children}</Flex>
-            <Flex justifyContent='flex-end'>
-              <Button mx={1}>取消</Button>
-              <Button mx={1} colorScheme='brand'>保存</Button>
-            </Flex>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size='4xl'
+      closeOnOverlayClick={false}
+    >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>{modalTitle}</ModalHeader>
+        <ModalCloseButton isDisabled={isLoading} />
+        <ModalBody>
+          {children}
+          <ModalFooter>
+            <Button mx={1} onClick={onClose} isLoading={isLoading}>取消</Button>
+            <Button mx={1} colorScheme='brand' onClick={onSave} isLoading={isLoading}>保存</Button>
+          </ModalFooter>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   )
 }

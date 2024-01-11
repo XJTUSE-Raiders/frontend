@@ -4,7 +4,6 @@ import React from "react";
 import { Flex, useColorModeValue, Text } from "@chakra-ui/react";
 
 // Custom components
-import { HorizonLogo } from "components/icons/Icons";
 import { HSeparator } from "components/separator/Separator";
 
 export function SidebarBrand() {
@@ -14,8 +13,8 @@ export function SidebarBrand() {
   return (
     <Flex align='center' direction='column'>
       <Flex direction='row' color={logoColor} mb='32px'>
-          <Text fontSize='3xl' fontWeight='bolder' mr={2}>欧联</Text>
-          <Text fontSize='3xl'>酋长</Text>
+          <Text fontSize='3xl' fontWeight='bolder' mr={2}>网站访客</Text>
+          <Text fontSize='3xl'>分析平台</Text>
       </Flex>
 
       {/* <HorizonLogo h='26px' w='175px' my='32px' color={logoColor} /> */}

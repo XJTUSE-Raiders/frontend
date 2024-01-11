@@ -6,8 +6,8 @@ import { api } from "variables/api";
 import { useQuery } from "@tanstack/react-query";
 
 
-function UserModifyButton(props) {
-  const { children, initialData, onSubmit, ...rest } = props;
+function UserAddButton(props) {
+  const { children, onSubmit, ...rest } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: roles, isLoading } = useQuery({
     queryKey: ['fetchUserRoles'],
@@ -18,14 +18,55 @@ function UserModifyButton(props) {
   });
   const toast = useToast();
 
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [selectedRoles, setSelectedRoles] = useState(initialData.roles.map((role) => ({ value: role, label: role })));
+  const [selectedRoles, setSelectedRoles] = useState([]);
   const [submitting, setSubmitting] = useState(false);
 
   const handleSave = (data) => {
     if (submitting) return;
+    if (username === '') {
+      toast({
+        title: '错误',
+        description: '用户名不能为空',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    if (password === '') {
+      toast({
+        title: '错误',
+        description: '密码不能为空',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    if (email === '') {
+      toast({
+        title: '错误',
+        description: '邮箱不能为空',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    if (phone === '') {
+      toast({
+        title: '错误',
+        description: '电话号码不能为空',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
     if (selectedRoles.length === 0) {
       toast({
         title: '错误',
@@ -37,28 +78,21 @@ function UserModifyButton(props) {
       return;
     }
     setSubmitting(true);
-    const newUser = { roles: selectedRoles.map((role) => role.value) };
-    if (password !== '') {
-      newUser.password = password;
-    }
-    if (email !== '') {
-      newUser.email = email;
-    }
-    if (phone !== '') {
-      newUser.phone = phone;
-    }
 
-    api.post('user/update', {
+    api.post('user/create', {
       json: {
-        username: initialData.username,
-        ...newUser,
+        username,
+        password,
+        email,
+        phone,
+        roles: selectedRoles.map((role) => role.value),
       }
     }).then(() => {
       setSubmitting(false);
       onClose();
       toast({
         title: '成功',
-        description: '修改用户成功',
+        description: '用户创建成功',
         status: 'success',
         duration: 3000,
         isClosable: true,
@@ -68,7 +102,7 @@ function UserModifyButton(props) {
       setSubmitting(false);
       toast({
         title: '错误',
-        description: `请检查输入合法性 (${err.message})`,
+        description: `请检查用户名冲突和输入合法性 (${err.message})`,
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -80,7 +114,7 @@ function UserModifyButton(props) {
     <Button {...rest} onClick={onOpen}>
       {children}
       <UserModifyModal
-        modalTitle="修改用户"
+        modalTitle="增加用户"
         isOpen={isOpen}
         onOpen={onOpen}
         onSave={handleSave}
@@ -91,25 +125,25 @@ function UserModifyButton(props) {
           <Flex direction='row' my={5}>
             <Flex direction='column' mx={3} w='50%'>
               <FormLabel>用户名</FormLabel>
-              <Input type='text' value={initialData.username} isReadOnly />
-              <FormHelperText>用户名不可编辑</FormHelperText>
+              <Input type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+              <FormHelperText>用户名必须唯一</FormHelperText>
             </Flex>
             <Flex direction='column' mx={3} w='50%'>
               <FormLabel>密码</FormLabel>
               <Input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-              <FormHelperText>留空不修改</FormHelperText>
+              <FormHelperText>设置较强的密码有助于系统安全</FormHelperText>
             </Flex>
           </Flex>
           <Flex direction='row' my={5}>
             <Flex direction='column' mx={3} w='50%'>
               <FormLabel>邮箱</FormLabel>
               <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-              <FormHelperText>邮箱必须唯一，留空不修改</FormHelperText>
+              <FormHelperText>邮箱必须唯一</FormHelperText>
             </Flex>
             <Flex direction='column' mx={3} w='50%'>
               <FormLabel>电话号码</FormLabel>
               <Input type='number' value={phone} onChange={(e) => setPhone(e.target.value)} />
-              <FormHelperText>电话号码必须唯一，留空不修改</FormHelperText>
+              <FormHelperText>电话号码必须唯一</FormHelperText>
             </Flex>
           </Flex>
           <Flex direction='row' my={5}>
@@ -133,4 +167,4 @@ function UserModifyButton(props) {
   );
 }
 
-export default UserModifyButton;
+export default UserAddButton;

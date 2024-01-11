@@ -20,7 +20,6 @@ import Card from 'components/card/Card.js'
 import TheadwithNoBubble from 'views/admin/dashboard/components/TheadwithNoBubble'
 import {
   useGlobalFilter,
-  usePagination,
   useSortBy,
   useTable
 } from 'react-table'
@@ -89,12 +88,10 @@ export default function GeoTable(props) {
       data: computedData,
     },
     useGlobalFilter,
-    useSortBy,
-    usePagination
+    useSortBy
   )
 
-  const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow } =
-    tableInstance
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
   const textColor = useColorModeValue('navy.700', 'white')
   const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
@@ -162,7 +159,7 @@ export default function GeoTable(props) {
             </TheadwithNoBubble>
 
             <Tbody {...getTableBodyProps()}>
-              {page.map((row, index) => {
+              {rows.map((row, index) => {
                 prepareRow(row)
                 return (
                   <Tr {...row.getRowProps()} key={index}>

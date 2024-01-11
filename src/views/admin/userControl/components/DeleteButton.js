@@ -7,15 +7,20 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  FormControl,
-  Flex
+  ModalFooter,
+  Code
 } from '@chakra-ui/react'
-function DeleteButton (props) {
-  const { children, tableConfig, tableData, modalName, ...rest } = props
+function DeleteButton(props) {
+  const { children, isDisabled, onConfirm, users, ...rest } = props
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  const handleConfirm = () => {
+    onConfirm?.()
+    onClose()
+  }
+
   return (
-    <Button {...rest} onClick={onOpen}>
+    <Button {...rest} onClick={onOpen} isDisabled={isDisabled}>
       {children}
       <Modal
         isOpen={isOpen}
@@ -28,16 +33,14 @@ function DeleteButton (props) {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>确定删除以下用户？</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton isDisabled={isDisabled} />
           <ModalBody>
-            <FormControl>
-              <Flex  justifyContent='flex-end' mb={5}>
-                              <Button mx={1} onClick={onClose}>取消</Button>
-              <Button mx={1} colorScheme='red'>删除</Button>
-              </Flex>
-
-            </FormControl>
+            <Code fontSize="md">{users.join(', ')}</Code>
           </ModalBody>
+          <ModalFooter>
+            <Button mx={1} onClick={onClose}>取消</Button>
+            <Button mx={1} colorScheme='red' onClick={handleConfirm}>删除</Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </Button>
