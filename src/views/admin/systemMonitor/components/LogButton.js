@@ -55,7 +55,7 @@ function LogButton (props) {
             <Flex direction='column' w="100%">
               <Flex w="100%">
                 <Box bgColor='gray.300' w="100%" borderRadius='lg' p={3} maxH={400} overflowY='auto' overflowWrap='normal'>
-                  <Text as='samp' w="100%">
+                  <Text as='pre' w="100%">
                     {isFetching ? 'Loading...' : data}
                   </Text>
                 </Box>
