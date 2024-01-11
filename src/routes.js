@@ -5,7 +5,7 @@ import {
   // MdBarChart,
   MdPerson,
   // MdHome,
-  MdLock,
+  // MdLock,
   // MdOutlineShoppingCart,
   MdAssistantNavigation,
   MdSettingsSuggest
@@ -22,7 +22,7 @@ import SystemMonitor from 'views/admin/systemMonitor'
 // import RTL from "views/admin/rtl";
 
 // Auth Imports
-import SignInCentered from "views/auth/signIn";
+// import SignInCentered from "views/auth/signIn";
 
 const routes = [
   {
@@ -31,6 +31,7 @@ const routes = [
     path: "/dashboard",
     icon: <Icon as={MdAssistantNavigation} width='20px' height='20px' color='inherit' />,
     component: Dashboard,
+    access: ['admin', 'maintainer', 'user'],
   },
   {
     name: "用户管理面板",
@@ -38,6 +39,7 @@ const routes = [
     path: "/usercontrol",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: UserControl,
+    access: ['admin'],
   },
   {
     name: "系统管理面板",
@@ -45,6 +47,7 @@ const routes = [
     path: "/system-monitor",
     icon: <Icon as={MdSettingsSuggest} width='20px' height='20px' color='inherit' />,
     component: SystemMonitor,
+    access: ['admin', 'maintainer'],
   },
   // {
   //   name: "原 Dashboard",

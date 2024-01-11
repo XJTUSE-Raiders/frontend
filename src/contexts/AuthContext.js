@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { api } from 'variables/api';
+import routes from 'routes';
 
 export const AuthContext = createContext();
 
@@ -111,10 +112,21 @@ export const AuthProvider = ({ children }) => {
         return Promise.resolve();
     };
 
+    const authRoutes = useMemo(() => {
+        if (activeRole === null) return [];
+
+        return routes.filter((route) => {
+            if (route.access) {
+                return route.access.indexOf(activeRole) !== -1;
+            }
+            return true;
+        });
+    }, [activeRole]);
+
     return (
-        <AuthContext.Provider value={{ userData,
-            roleList, activeRole, isAuthenticated,
-            isReady, login, selectRole, logout }}>
+        <AuthContext.Provider value={{ userData, authRoutes,
+            roleList, activeRole, isAuthenticated, isReady,
+            login, selectRole, logout }}>
             {children}
         </AuthContext.Provider>
     );

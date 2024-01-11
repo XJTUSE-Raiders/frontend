@@ -13,7 +13,7 @@ export default function AdminNavbar(props) {
 		return () => {
 			window.removeEventListener('scroll', changeNavbar);
 		};
-	});
+	}, []);
 
 	const { secondary, message, brandText } = props;
 
@@ -90,13 +90,13 @@ export default function AdminNavbar(props) {
 				<Box mb={{ sm: '8px', md: '0px' }}>
 					<Breadcrumb>
 						<BreadcrumbItem color={secondaryText} fontSize='sm' mb='5px'>
-							<BreadcrumbLink href='#' color={secondaryText}>
-								Pages
+							<BreadcrumbLink href='#/admin/dashboard' color={secondaryText}>
+								分析平台
 							</BreadcrumbLink>
 						</BreadcrumbItem>
 
 						<BreadcrumbItem color={secondaryText} fontSize='sm' mb='5px'>
-							<BreadcrumbLink href='#' color={secondaryText}>
+							<BreadcrumbLink color={secondaryText}>
 								{brandText}
 							</BreadcrumbLink>
 						</BreadcrumbItem>
