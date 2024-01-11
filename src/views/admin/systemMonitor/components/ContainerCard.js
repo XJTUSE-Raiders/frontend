@@ -22,15 +22,9 @@ import { VSeparator } from 'components/separator/Separator'
 import LogButton from './LogButton'
 
 export default function ContainerCard(props) {
-  const { containerName, version, upTime, status, reportTime, isOk, ...rest } = props
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
-  const textColorSecondary = 'secondaryGray.600'
-  function okStatus() {
-    return isOk === 'true' ? FcOk : FcHighPriority
-  }
-  function badgeStatus() {
-    return isOk === 'true' ? 'Operational' : 'Outage'
-  }
+  const { containerId, containerName, status, state, ...rest } = props;
+  const textColor = useColorModeValue('secondaryGray.900', 'white');
+  const isOk = state === 'running';
   function colorStatus() {
     return isOk === 'true' ? 'green' : 'red'
   }
@@ -38,12 +32,8 @@ export default function ContainerCard(props) {
   // Chakra Color Mode
   return (
     <Card
-      // backgroundImage={bgMastercard}
-      // backgroundRepeat='no-repeat'
-      // bgSize='cover'
       alignSelf='center'
       w={{ base: '100%', md: '60%', xl: '99%' }}
-      // bgPosition='10%'
       mx='auto'
       p='20px'
       {...rest}
@@ -61,17 +51,17 @@ export default function ContainerCard(props) {
             </Flex>
           </Flex>
 
-          <Icon as={okStatus()} w='50px' h='auto' color='gray.400' />
+          <Icon as={isOk ? FcOk : FcHighPriority} w='50px' h='auto' color='gray.400' />
         </Flex>
         <HSeparator />
         <Flex direction='column'>
           <Flex mt='14px'>
             <Flex direction='column' me='34px'>
               <Text fontSize='lg' fontWeight='bold'>
-                Uptime
+                Status
               </Text>
               <Text fontSize='md' fontWeight='500' as='samp'>
-                {upTime}
+                {status}
               </Text>
             </Flex>
             <Spacer>
@@ -79,10 +69,10 @@ export default function ContainerCard(props) {
             </Spacer>
             <Flex direction='column'>
               <Text fontSize='lg' fontWeight='bold'>
-                Status
+                状态
               </Text>
-              <Badge variant='subtle' colorScheme={colorStatus()} alignSelf='center'>
-                {badgeStatus()}
+              <Badge variant='subtle' colorScheme={isOk ? 'green' : 'red'} alignSelf='center'>
+                {state}
               </Badge>
             </Flex>
           </Flex>

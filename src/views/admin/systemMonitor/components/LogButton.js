@@ -24,7 +24,7 @@ function LogButton (props) {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        size='md'
+        size='4xl'
         useInert='false'
       >
         <ModalOverlay />
